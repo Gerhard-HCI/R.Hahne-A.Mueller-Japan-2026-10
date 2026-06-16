@@ -456,21 +456,7 @@
   <div id="tab-emergency" class="tab-panel"></div>
 </div>
 
-<div class="modal-overlay" id="diet-modal" onclick="if(event.target===this)closeDietModal()">
-  <div class="modal" role="dialog" aria-modal="true">
-    <div class="modal-grabber"></div>
-    <div class="modal-head">
-      <div>
-        <div class="modal-title">For the Chef</div>
-        <div class="modal-title-jp">シェフへのご案内</div>
-      </div>
-      <button class="modal-close" onclick="closeDietModal()" aria-label="Close">&times;</button>
-    </div>
-    <div class="modal-intro">Show this card at the counter on arrival. Please bring any avoidances to the chef's attention before service begins.</div>
-    <div id="modal-jp-content"></div>
-    <div class="modal-footer-note">ご親切に対応していただき、誠にありがとうございます。<br><em>Thank you sincerely for your kind accommodation.</em></div>
-  </div>
-</div>
+<!-- diet sheet omitted: no dietary notes on file -->
 
 <div id="toast"></div>
 
@@ -511,7 +497,7 @@
 (function(){
 'use strict';
 
-/* ═══ CONFIG · Attwood · 23 Jun – 5 Jul 2026 ═══ */
+/* ═══ CONFIG · Hahne · 31 Oct – 14 Nov 2026 ═══ */
 var FX_RATE = 160.00;
 
 /* ═══ TRIP DATA · Hahne · Kyushu → Hokuriku → Tokyo ═══
@@ -1045,7 +1031,7 @@ function renderDiet(){
   }).join('');
 }
 {document.getElementById('diet-modal').classList.add('active');document.body.style.overflow='hidden';};
-window.closeDietModal=function(){document.getElementById('diet-modal').classList.remove('active');document.body.style.overflow='';};
+window.closeDietModal=function(){var m=document.getElementById('diet-modal');if(m){m.classList.remove('active');document.body.style.overflow='';}};
 
 /* ═══ RENDER · UTILITIES ═══ */
 function renderUtilities(){
@@ -1120,6 +1106,7 @@ function renderEmergency(){
 
 
 function init(){
+  var _dm=document.getElementById('diet-modal');if(_dm)_dm.classList.remove('active');
   renderItinerary();
   renderDiscover();
   renderWishlist();
@@ -1153,4 +1140,3 @@ window.addEventListener('resize',fixHeaderOffset);
 
 </body>
 </html>
-
