@@ -1102,7 +1102,7 @@ function renderUtilities(){
     +'<div class="section-label">Currency Converter</div>'
     +'<div class="util-card"><div class="util-card-title">JPY ↔ EUR</div>'
     +'<div class="fx-row">'
-    +'<div class="fx-group"><div class="fx-label">🇯🇵 Japanese Yen</div><input class="fx-input" id="fx-jpy" type="text" inputmode="decimal" value="100.000,00"></div>'
+    +'<div class="fx-group"><div class="fx-label">🇯🇵 Japanese Yen</div><input class="fx-input" id="fx-jpy" type="text" inputmode="numeric" value="100.000"></div>'
     +'<button class="fx-swap-btn" id="fx-swap">⇋</button>'
     +'<div class="fx-group"><div class="fx-label">🇪🇺 Euro</div><input class="fx-input" id="fx-eur" type="text" inputmode="decimal"></div>'
     +'</div><div class="fx-rate-note">Kurs: 1 EUR = '+new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(FX_RATE)+' JPY · Planungskurs · Juni 2026</div></div>'
@@ -1124,15 +1124,35 @@ function renderUtilities(){
     +'<div class="rule-item"><span class="rule-icon">🔒</span><div class="rule-text"><strong>Reservations are Firm</strong>Once confirmed, reservations are commitments — cancellations damage relationships built over many seasons.</div></div>'
     +'</div>';
   var jEl=document.getElementById('fx-jpy'),uEl=document.getElementById('fx-eur');
-  function parseDE(s){if(s==null)return NaN;s=String(s).trim().replace(/\./g,'').replace(/,/g,'.');return s===''?NaN:parseFloat(s);}
-  function fmtDE(n){return isNaN(n)?'':new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);}
-  function fJ(){var v=parseDE(jEl.value);uEl.value=isNaN(v)?'':fmtDE(v/FX_RATE);}
-  function fU(){var v=parseDE(uEl.value);jEl.value=isNaN(v)?'':fmtDE(v*FX_RATE);}
-  jEl.addEventListener('input',fJ);uEl.addEventListener('input',fU);
+  var grp=new Intl.NumberFormat('de-DE',{maximumFractionDigits:0});
+  function groupInt(d){return d===''?'':grp.format(parseInt(d,10));}
+  function toEnd(el){try{var n=el.value.length;el.setSelectionRange(n,n);}catch(e){}}
+  function fmtJPY(n){return isNaN(n)?'':grp.format(Math.round(n));}
+  function fmtEUR(n){return isNaN(n)?'':new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);}
+  // Yen field: digits only, grouped live, no decimals
+  function onJPY(){
+    var d=jEl.value.replace(/[^0-9]/g,'');
+    jEl.value=groupInt(d);toEnd(jEl);
+    uEl.value=d===''?'':fmtEUR(parseInt(d,10)/FX_RATE);
+  }
+  // Euro field: group the integer part live, keep up to 2 decimals as typed
+  function onEUR(){
+    var m=uEl.value.replace(/\./g,'').match(/^(\d*)(,?)(\d{0,2})/);
+    var ip=m?m[1]:'',cm=m&&m[2]?',':'',dp=m?m[3]:'';
+    uEl.value=groupInt(ip)+cm+dp;toEnd(uEl);
+    var v=(ip===''&&dp==='')?NaN:parseFloat((ip||'0')+'.'+(dp||'0'));
+    jEl.value=isNaN(v)?'':fmtJPY(v*FX_RATE);
+  }
+  jEl.addEventListener('input',onJPY);
+  uEl.addEventListener('input',onEUR);
   document.getElementById('fx-swap').addEventListener('click',function(){
-    var t=jEl.value;jEl.value=uEl.value?fmtDE(parseDE(uEl.value)*FX_RATE):'';uEl.value=t?fmtDE(parseDE(t)/FX_RATE):'';
+    var jv=parseInt(jEl.value.replace(/[^0-9]/g,'')||'',10);
+    var em=uEl.value.replace(/\./g,'').match(/^(\d*),?(\d{0,2})/);
+    var ev=em?parseFloat((em[1]||'0')+'.'+(em[2]||'0')):NaN;
+    jEl.value=isNaN(ev)?'':fmtJPY(ev*FX_RATE);
+    uEl.value=isNaN(jv)?'':fmtEUR(jv/FX_RATE);
   });
-  fJ();
+  onJPY();
 }
 
 /* ═══ RENDER · CONTACTS & EMERGENCY ═══ */
@@ -1202,77 +1222,299 @@ window.addEventListener('resize',fixHeaderOffset);
 }());
 </script>
 
-<!-- Statement library: client-side AES-GCM, two-tier access -->
+<!-- HCI Statement library — self-contained IIFE, isolated from the host app -->
 <script>
 (function(){
 "use strict";
-var BLOBS={guest:"NcWRJJOJIH2suooobGR/W/aX+mT18IUPKIAIZoK3ETLP2IWlLn+3GIWtUp1yfRSErBCvLQ0Pgd+yb7w1JiZBBfAAQru8Y7C+tFtQsAp210CEse3GxWZz0ojcf2LomGhFLeJCV1Xnr1og/d0wkyaPeEbx561oSvgewgdTINAAapz95K4g6U1V/x3Bz4i9FA3N0eQUBrn3IvyxtqL8jL7WL1tQUGktGqRmKktsFXZzaE5PYxtygEzOIRa5T+rSHOhtjf5Mfq4oALJaN3/qEin27dv3JrljiDxZZVgFO7xPY4LY2JX2EsqSG/7iYNZTy+lOEEYOjmpHFx14lytexEyLKf+En0oOeCJH8i/1irzNkqdgz9GZJYS+Fp8TM0Nvp704v1i5hTysaDrhKnJE8WBg46xKYvDu5GKyY4XEp9rwmMh3DEbcN02kr9bpges5Lk24Atj0t/QEP1XO1a35frsZcZ8dqHwdeggU908q/CSktPMnh+Z9jC2xJQosnjr/Iky6aKdGzrHikVyBZbD+mWwtPbMC5NGTYT2vME6oHywT3LBPpDTHKHGlKrXELPBc16fnQikEbtyQkV/qS/CVqCcGLE2keyvxQ2QN45B8a0pkthRiMbglr2Kq08YQQw//z2HLSqpjKgWz6yypFJ48ZhHn/ghQ3NqwiWD3geqPqlZCpvCR0MN2EmIQuWYlODr/ebvJ0IVnvoUM1iO70G8y7ScQOPtmHLNw7YKOvP3RB3BCR0wd/3JIyGEC8rzmGHdCqvJe9kadQbsB2pbshcPKaA==",staff:"Jq7gXInxT0Qhj9ECpJGyQrHEc5+Cv8lZynPu6ozZfKiz4DhjmRTuR2+nJhaoCU+u2mLeywPEx98PCmUc9xRCyiHDV9lo26XXiPxisen352q71ZHA5/4V+8UkgiJcUn1J8Pg/0R+6blgU2b+p4u9ranGu+AB79lQHxPAbuckJoykxVgQ6ArZoBPXYo3A5vvfXLBKUsZdKguGN2Bm8AsGf8LjI/j4bKIwi3Iv+/Z21Dgj5GYT0RCNyj8wGFZD5BYHphJLEDbMrBgP7v4jc5AHh3qyPrbCz9j9sInu2EWaCDPXSGm5T4l0TdlJBmjUpxdUEg5UrZmycrnBqi8xZTiIToTiOxA9EY4+2Yq37UDD7FigiXoJh5PmCi3ReJYjfB1yr9ragMVgp9nPsOEmgtpuaIj8zTZWds9/Scf/D0oQGayjRtltMxUBv6REvUdfLyd+gEo9O5vbHiYVcs/Y22dxilPWJ9HAaqua3BFN2xrQHV3VxGeADFo3cjJY76JKGAN+wjYgr8mX0AwgNycy34CJDeAKpFypvsdSsBQrGdhpjVPhH6Fg2IIn5ROU12gZu5ho1iuflbjP6oTtFyJtGJAgbigN6EsHEySJYL+FYLMhyOKBgldw9KCRr4ec+M2MBoLc6SIv2VwUf0kqiOX7BCeH6bCAZQ3FgIWKSrdlYSMSFrdvTmkd0rCxb+LFEuG29GygLmVpDbY4sfEKP5aJskM9sTHCB1oPgWd065A9Xcudh0q91nUwAFLO8Ja8MuacMq7qlxWJX6v/ivwTFDjn/sRZjLLmzUGUES6l2rrMHEpoTQ77lTWK8SEmcNUjDSUapUnKwqSXc10u3EX0YMLpa81Hr5DexIk/C8MawFNb1rUUpaY8gAPZ0VQzLNY9DRckqWvYmH4TNqF5cq34oqXc0hbAM9yJiY48CvT37e+NYC6mGrZj5/qgq38itn0RfrJvyI0+yxc91GMgvCURlC2lH00NUasGGqzf1GQXhetUlteugiB87oBpZl3NI8hyaJ0Px/xr6jdG2FyU67nuLlTDQcjIAY8xTOHwP9zjUWfU9+r/nz1IvRaAsqYVUKCNhSIaRkKuTIvy+tcIcuDhAAfHnql10J+fUIEnUjCdsXCeVQ6O4U/MJ8Hz6ghELgnE4Ea0l9CXVUK5SS4DscKaKMf+OrPxqH3xe9HvLw4fRFd9K14gIN9CudVeZblKsfa8dOMPc8Ko="};
-var ITER=150000;
-var unlocked=false, idleTimer=null;
-function $(s){return document.querySelector(s);}
-function b2u(b64){var bin=atob(b64);var a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a;}
-function money(n){return "$"+Number(n).toLocaleString("en-US",{maximumFractionDigits:0});}
-function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-function deriveKey(pw,salt){
-  return crypto.subtle.importKey("raw",new TextEncoder().encode(pw),{name:"PBKDF2"},false,["deriveKey"])
-   .then(function(base){return crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:ITER,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);});
+
+const ENC_GUEST = "9x2dhke/P8QRn8LvgE/Z+gxcGMw+xRoDHABLC/p2LbK9fctxVAwftUZuFoHjFJD62a++m+zgcb3yU9Zss87fGLPyZDUVgIVThyOwHi49TtBgg1GNGbYUyc4sHI7xGSexIchjGH/cX+TqgDURbcOnnJEpm2CeIFxVeOyoKQe2v26O1ttR6t9ReemTkgHJBvd2zflglyYp4mj0sPaG2NtPKlF/NEEsmRNkiRCM15N6NNrLyf56jEoDXvFHP9B15SE2uQsJdztcZnmyUK8Nf6ND+sbsvpTxioYfqz74yIMwp7Wh7cFeQr5SDlYzJ1GaAOvn4ukWc9eSmcgCVB7u6XIIbcGm1lmlel3csdQgL7czoK52c6/UJRY3ku3ebh74xiooBL69f5bW3ExxBsOz9cLOTOF+UqaJe6uIBbWLniQo04Ckd+0THiPLxdQwrcuYvLsdLsjITHoiB7lUtS3Lkx7gEJo9IaGmD0+aQ1aocrdnREP//dDA+OiKI33eKiLJV12wstZyzQF+hj+3LrfkIWMxbb6y2zPzM7NM5Xvo32/d0wzhHTRdhJ/uGxklXOBG2IRY8Q5Ntzfc+oLVln36jerplX6ubMDl//TZ8AAzPw53QbhBpB7ll3oxlymSkbv6IoWwCjhUXITyIF0ZmWwF+pAybEJ1lUpjK48CiWaKpcJlYV0VAE3zdWRaL/IepwBUjZMreHv5ozZ7u/WlxtSwCgVBLGa8VNsXwzqM59W2uy3JTg/z47O8y1C4pAhLeqNyWb1ar3Pg6C7gYRW9rqLO4f+jXaRqKmtLYW9RaV9nWqCevW/0d8AotrpGaDrIN2ITJr7Zm0QG2EIeBDJw84c0AkCE6i3sRK3WrWAWn30R3M2xVzdooc8=";
+const ENC_INTERNAL = "B4T5PlqVmZ/AJ4wPdy39JzYeBQLhKJIagy+H1UcV+grdU1uD6stZXKmOx7sEh10IQBxE1UFpDzdfypf53Ro56ZraGbsj/9arZlNSQEO7BlcuWUaIVjIlT6mkxxHsfa4/QjUzS2XA2h1vY/SvDQUgbwV+eg908UfUUyo3CJgyedxIhbqGarzfOpntBJJRadkRtHwZh6O6GS/bZkDIxFPKei11eCpQdV4rVH4bH8//nJrpA2/qUsrALxBm1QE0BsKSv8DDU5MzJwFP0Ix/SU2E8MeYTzc0LrlRo26r1lGhyreTpQo+nxhR9bL0uEY8B7GhnM6Pb6lKonLt6+So/Vz7iNPty2iUeSHJ534nQhws8FX3LAc4otM/pzO7Je12HI3Lf9fB0njmcHmODLqv9WBorjJhIpp6wC8/6Xf2kUl+uDZWV+K2TWCm8CClpCxSEZmyUbr47dZfF2RiF/uz81Yb7EPbg5fM6Dh63BLBhjz6/lk/xdagFOAd+14ysZgLVQA2uW32IHb6+vnOrbE8t1D9xoBJkt3alnmnyDnIbysiNOyl4IuYF9zOKYS+knYx1JqxaYDwEwblyx8gPy14VFewZDUB7X6vIDrMX8y3ESJ3zMLl4KLHdt/meCCMePP727G1gPVNLeerpF5wAK0nyGZc1KwDVFatR9FanY5nzCxWwS6wPZm0eLkLnb+nhVObS+AePP/GYEdHb4223U0jE3IJRwjkCv1er/ijxFl+p9m4xQ1o0ormlY2acmbc0Lp/Y1xjzesNBZfEGovZvHEGsxpTv4TSa23nPzNIe9nfTSqbPDygwpaEoN1tBNt7IbXG/szRhCu6KiLPFp+0Yl91e/nisAVV1ohl7TZSbnEad0KbPYFEpZcceE9VamX5R3sMkK+t4bdyWlk=";
+
+const TIMEOUT_SEC = 120;
+
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const usd = n => "$" + Number(n).toLocaleString("en-US", { maximumFractionDigits: 0 });
+function parseDate(iso){ const [y,m,d] = iso.split("-").map(Number); return new Date(y, m-1, d); }
+
+const PBKDF2_ITERATIONS = 250000;
+const SALT_LEN = 16, IV_LEN = 12;
+const _enc = new TextEncoder(), _dec = new TextDecoder();
+function cryptoReady(){ return !!(window.crypto && window.crypto.subtle); }
+function b64encode(bytes){
+  const b = new Uint8Array(bytes); let s = "";
+  for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]);
+  return btoa(s);
 }
-function tryDecrypt(blob,pw){
-  var raw=b2u(blob);var salt=raw.slice(0,16),iv=raw.slice(16,28),body=raw.slice(28);
-  return deriveKey(pw,salt).then(function(key){return crypto.subtle.decrypt({name:"AES-GCM",iv:iv},key,body);})
-   .then(function(buf){return JSON.parse(new TextDecoder().decode(buf));});
+function b64decode(str){
+  const s = atob(str.trim()); const b = new Uint8Array(s.length);
+  for (let i = 0; i < s.length; i++) b[i] = s.charCodeAt(i);
+  return b;
 }
-function row(label,val,note){
-  var right = (val==null) ? '<span class="stmt-pending">'+esc(note||"—")+'</span>' : money(val);
-  var sub = (val!=null && note) ? '<div class="stmt-note">'+esc(note)+'</div>' : '';
-  return '<div class="stmt-row"><div class="stmt-label">'+esc(label)+sub+'</div><div class="stmt-val">'+right+'</div></div>';
+async function deriveKey(password, salt){
+  const base = await crypto.subtle.importKey("raw", _enc.encode(password), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey(
+    { name:"PBKDF2", salt, iterations:PBKDF2_ITERATIONS, hash:"SHA-256" },
+    base, { name:"AES-GCM", length:256 }, false, ["encrypt","decrypt"]
+  );
 }
-function render(d){
-  var staff = d.role==="staff";
-  var h='<div class="emergency-banner" style="margin-bottom:14px">'
-    +(staff?'<div style="font-size:10px;letter-spacing:1.5px;opacity:.6;text-transform:uppercase;margin-bottom:4px">Staff · Internal</div>':'')
-    +'<h2>'+esc(d.title)+'</h2><p>'+esc(d.sub)+'</p></div>';
-  h+='<div class="util-card" style="padding:6px 16px">';
-  d.lines.forEach(function(l){h+=row(l.label,l.val,l.note);});
-  h+='<div class="stmt-row stmt-sub"><div class="stmt-label">Payments received</div><div class="stmt-val">'+money(d.paymentsTotal||0)+'</div></div>';
-  if(d.payments&&d.payments.length){d.payments.forEach(function(p){h+=row("· "+(p.label||"Payment")+(p.date?" ("+p.date+")":""),-Math.abs(p.amount));});}
-  h+='<div class="stmt-row stmt-total"><div class="stmt-label">Outstanding balance</div><div class="stmt-val">'+money(d.outstanding)+'</div></div>';
-  h+='</div>';
-  if(staff && d.internal){
-    h+='<div class="section-label">Internal reference</div><div class="util-card" style="padding:6px 16px">';
-    d.internal.forEach(function(l){h+=row(l.label,l.val,l.note);});
-    h+='</div>';
+async function encryptText(password, plaintext){
+  const salt = crypto.getRandomValues(new Uint8Array(SALT_LEN));
+  const iv = crypto.getRandomValues(new Uint8Array(IV_LEN));
+  const key = await deriveKey(password, salt);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name:"AES-GCM", iv }, key, _enc.encode(plaintext)));
+  const out = new Uint8Array(salt.length + iv.length + ct.length);
+  out.set(salt, 0); out.set(iv, SALT_LEN); out.set(ct, SALT_LEN + IV_LEN);
+  return b64encode(out);
+}
+async function decryptText(password, blob){
+  const data = b64decode(blob);
+  const salt = data.slice(0, SALT_LEN);
+  const iv = data.slice(SALT_LEN, SALT_LEN + IV_LEN);
+  const ct = data.slice(SALT_LEN + IV_LEN);
+  const key = await deriveKey(password, salt);
+  const pt = await crypto.subtle.decrypt({ name:"AES-GCM", iv }, key, ct);
+  return _dec.decode(pt);
+}
+function payUrl(st){
+  if (!st.payLink) return null;
+  let u = st.payLink.trim();
+  if (!/^https?:\/\//i.test(u)) return null;
+  if (st.payRef && !/client_reference_id=/.test(u)){
+    u += (u.indexOf("?") >= 0 ? "&" : "?") + "client_reference_id=" + encodeURIComponent(st.payRef);
   }
-  h+='<div class="util-card"><ul class="info-list"><li><span class="info-emoji">💱</span><div class="info-text"><strong>'+esc(d.rate)+'</strong>'+esc(d.footnote)+'</div></li></ul></div>';
-  h+='<div style="text-align:center;padding:6px 0 4px"><button class="btn" id="stmt-relock" style="background:#eceff4;color:#33475c">Lock</button></div>';
-  $("#stmt-view").innerHTML=h;
-  $("#stmt-lock").style.display="none";
-  $("#stmt-view").style.display="block";
-  var rb=document.getElementById("stmt-relock"); if(rb) rb.addEventListener("click",lock);
-  unlocked=true; arm();
+  return u;
 }
-function unlock(){
-  var pw=$("#stmt-pw").value; var err=$("#stmt-err");
-  if(!pw){err.textContent="Enter your access code.";return;}
-  err.textContent="Checking…";
-  tryDecrypt(BLOBS.guest,pw).then(render).catch(function(){
-    return tryDecrypt(BLOBS.staff,pw).then(render).catch(function(){err.textContent="That code was not recognised.";});
+function computeTotals(st){
+  let total = 0, cost = 0;
+  const secs = (st.sections || []).map(sec => {
+    const items = sec.items || [];
+    const sub = items.reduce((a,i) => a + (Number(i.amount)||0), 0);
+    const csub = items.reduce((a,i) => a + (Number(i.cost)||0), 0);
+    total += sub; cost += csub;
+    return { ...sec, _sub: sub, _cost: csub };
   });
+  total += Number(st.arrangementFee)||0;
+  const paid = (st.payments || []).reduce((a,p) => a + (Number(p.amount)||0), 0);
+  const profit = total - cost;
+  return { secs, total, cost, profit, margin: total>0 ? profit/total : 0, paid, outstanding: total - paid };
 }
-function lock(){
-  unlocked=false; if(idleTimer){clearTimeout(idleTimer);idleTimer=null;}
-  var v=$("#stmt-view"); if(v){v.innerHTML="";v.style.display="none";}
-  var l=$("#stmt-lock"); if(l) l.style.display="";
-  var pw=$("#stmt-pw"); if(pw) pw.value="";
-  var er=$("#stmt-err"); if(er) er.textContent="";
+function renderStatement(st, internal){
+  const t = computeTotals(st);
+  const { secs, total, paid, outstanding } = t;
+  const balZero = outstanding <= 0;
+  let html = "";
+  if (internal){
+    html += '<div class="stmt-internal-banner">Internal view · cost &amp; margin visible — do not show to guests</div>';
+  }
+  html += '<div class="card">';
+  html += '<div class="stmt-head">' +
+    '<div class="stmt-as">Statement · as of ' +
+      parseDate(st.asOf).toLocaleDateString("en-US",{day:"numeric",month:"long",year:"numeric"}) + '</div>' +
+    '<div class="stmt-balance' + (balZero?" zero":"") + '">' + usd(outstanding) + '</div>' +
+    '<div class="stmt-blabel">' + (balZero ? "Balance settled — thank you" : "Remaining outstanding balance") + '</div>' +
+  '</div>';
+  const pu = payUrl(st);
+  if (!balZero){
+    if (internal){
+      html += '<div class="stmt-pay-cta">' +
+        '<div class="paybtn disabled">' + (pu ? 'Guest payment link active' : 'No payment link set yet') + '</div>' +
+        '<div class="paybtn-sub">' + (pu ? 'The guest sees a live Pay button here.' : 'Add a payLink in the console so the guest can pay.') + '</div>' +
+      '</div>';
+    } else if (pu){
+      html += '<div class="stmt-pay-cta">' +
+        '<a class="paybtn" href="' + pu + '" target="_blank" rel="noopener">Pay outstanding balance · ' + usd(outstanding) + '</a>' +
+        '<div class="paybtn-sub">Secure checkout via Stripe · opens in a new tab</div>' +
+      '</div>';
+    } else {
+      html += '<div class="stmt-pay-cta">' +
+        '<div class="paybtn disabled">Payment link not yet available</div>' +
+        '<div class="paybtn-sub">A secure payment link will appear here once the invoice is issued.</div>' +
+      '</div>';
+    }
+  }
+  secs.forEach(sec => {
+    html += '<div class="stmt-sec">';
+    html += '<div class="stmt-sec-h"><span class="n">' + sec.name + '</span>' +
+            '<span class="v">' + usd(sec._sub) + '</span></div>';
+    if (sec.note) html += '<div class="stmt-sec-note">' + sec.note + '</div>';
+    (sec.items||[]).forEach(it => {
+      const incl = (Number(it.amount)||0) === 0;
+      const prof = (Number(it.amount)||0) - (Number(it.cost)||0);
+      const profStr = (prof < 0 ? "-" + usd(Math.abs(prof)) : usd(prof));
+      const intLine = (internal && it.cost != null)
+        ? '<div class="li-int">cost ' + usd(it.cost) + ' · profit ' + profStr + '</div>'
+        : "";
+      html += '<div class="stmt-li"><div><div class="li-l">' + it.label + '</div>' +
+        (it.note ? '<div class="li-n">' + it.note + '</div>' : "") + intLine + '</div>' +
+        '<div class="li-v' + (incl?" incl":"") + '">' + (incl ? "included" : usd(it.amount)) + '</div></div>';
+    });
+    html += '</div>';
+  });
+  if ((Number(st.arrangementFee)||0) !== 0){
+    html += '<div class="stmt-sec"><div class="stmt-sec-h"><span class="n">Arrangement fee</span>' +
+            '<span class="v">' + usd(st.arrangementFee) + '</span></div></div>';
+  }
+  html += '<div class="stmt-total"><span class="n">Total services &amp; charges</span>' +
+          '<span class="v">' + usd(total) + '</span></div>';
+  if (internal){
+    html += '<div class="stmt-pl">' +
+      '<div class="pl-row"><span>Revenue</span><span>' + usd(total) + '</span></div>' +
+      '<div class="pl-row"><span>Cost</span><span>' + usd(t.cost) + '</span></div>' +
+      '<div class="pl-row profit"><span>Profit</span><span>' + usd(t.profit) + '</span></div>' +
+      '<div class="pl-row"><span>Margin</span><span>' + (t.margin*100).toFixed(1) + '%</span></div>' +
+    '</div>';
+  }
+  html += '<div class="stmt-pay"><div class="stmt-sec-h" style="border-top:0;padding-top:14px">' +
+          '<span class="n">Payments received</span><span class="v">' + usd(paid) + '</span></div>';
+  if (!(st.payments && st.payments.length)){
+    html += '<div class="empty">No payments recorded yet.</div>';
+  } else {
+    st.payments.forEach(p => {
+      html += '<div class="stmt-li"><div class="li-l">' + (p.label||"Payment") +
+        (p.date ? ' · ' + p.date : "") + '</div><div class="li-v">' + usd(p.amount) + '</div></div>';
+    });
+  }
+  html += '</div>';
+  if (st.fxNote) html += '<div class="stmt-fx">' + st.fxNote + '</div>';
+  html += '</div>';
+  html += '<button class="stmt-lockbtn" id="stmt-relock">🔒 Lock &amp; log out</button>';
+  $("#stmt-view").innerHTML = html;
+  $("#stmt-lock").style.display = "none";
+  $("#stmt-relock").addEventListener("click", () => lockStatement());
+  stmtUnlocked = true;
+  armStmtTimer();
 }
-function arm(){ if(idleTimer)clearTimeout(idleTimer); idleTimer=setTimeout(lock,180000); }
+let stmtUnlocked = false, stmtTimer = null;
+function clearStmtTimer(){ if (stmtTimer){ clearTimeout(stmtTimer); stmtTimer = null; } }
+function armStmtTimer(){
+  clearStmtTimer();
+  const secs = TIMEOUT_SEC;
+  if (secs > 0) stmtTimer = setTimeout(() => lockStatement(true), secs * 1000);
+}
+function lockStatement(auto){
+  clearStmtTimer();
+  stmtUnlocked = false;
+  $("#stmt-view").innerHTML = "";
+  $("#stmt-lock").style.display = "";
+  $("#stmt-pw").value = "";
+  $("#stmt-err").textContent = (auto === true) ? "Session locked for security — re-enter your code." : "";
+}
+async function unlockStatement(){
+  const pw = $("#stmt-pw").value.trim();
+  const err = $("#stmt-err");
+  err.textContent = "";
+  if (!pw){ err.textContent = "Please enter your access code."; return; }
+  if (!cryptoReady()){
+    err.textContent = "Secure view needs an https connection — open the published link, not a local file.";
+    return;
+  }
+  const btn = $("#stmt-unlock"); const label = btn.textContent; btn.textContent = "…";
+  try{
+    try{ renderStatement(JSON.parse(await decryptText(pw, ENC_GUEST)), false); return; }
+    catch(_g){}
+    try{ renderStatement(JSON.parse(await decryptText(pw, ENC_INTERNAL)), true); return; }
+    catch(_i){}
+    err.textContent = "That code didn’t work. Please check and try again.";
+  }finally{
+    btn.textContent = label;
+  }
+}
+const TEMPLATE = {
+  tripTitle: "Trip name", guest: "Guest name(s)",
+  asOf: new Date().toISOString().slice(0,10), currency: "USD",
+  fxNote: "USD figures converted from JPY at the prevailing exchange rate.",
+  arrangementFee: 0,
+  payLink: "",
+  payRef: "",
+  sections: [
+    { name:"Restaurant", note:"", items:[ { label:"", amount:0, cost:0, note:"" } ] },
+    { name:"Activity", items:[ { label:"", amount:0, cost:0 } ] },
+    { name:"Out-of-pocket expenses", items:[ { label:"", amount:0, cost:0 } ] },
+    { name:"Cancellation fees", items:[ { label:"", amount:0, cost:0 } ] }
+  ],
+  payments: []
+};
+function stripInternal(master){
+  const g = JSON.parse(JSON.stringify(master));
+  (g.sections || []).forEach(s => (s.items || []).forEach(it => { delete it.cost; }));
+  return g;
+}
+function setupConsole(){
+  const open = () => $("#console").classList.add("show");
+  if (location.hash === "#encrypt") open();
+  window.addEventListener("hashchange", () => {
+    if (location.hash === "#encrypt") open();
+  });
+  $("#con-close").addEventListener("click", () => {
+    $("#console").classList.remove("show");
+    if (location.hash === "#encrypt") history.replaceState(null,"",location.pathname);
+  });
+  const msg = (m, ok) => { const e=$("#con-msg"); e.textContent=m; e.style.color = ok? "#9DBE8C":"#D69A9A"; };
+  $("#con-template").addEventListener("click", () => {
+    $("#con-json").value = JSON.stringify(TEMPLATE, null, 2);
+    msg("Blank template loaded — cost = internal only.", true);
+  });
+  $("#con-load").addEventListener("click", async () => {
+    const pw = $("#con-pw-internal").value.trim();
+    if (!pw){ msg("Enter the internal code to load the master sheet."); return; }
+    if (!cryptoReady()){ msg("Open via https to use encryption."); return; }
+    try{
+      const j = await decryptText(pw, ENC_INTERNAL);
+      $("#con-json").value = JSON.stringify(JSON.parse(j), null, 2);
+      msg("Loaded master statement — edit, then re-encrypt.", true);
+    }catch(e){ msg("Wrong internal code, or nothing saved yet. Use ‘Blank template’."); }
+  });
+  $("#con-encrypt").addEventListener("click", async () => {
+    const gpw = $("#con-pw-guest").value.trim();
+    const ipw = $("#con-pw-internal").value.trim();
+    if (!gpw || !ipw){ msg("Enter BOTH the guest and internal codes."); return; }
+    if (gpw === ipw){ msg("Use two different codes for guest and internal."); return; }
+    if (!cryptoReady()){ msg("Open via https to use encryption."); return; }
+    let master;
+    try{ master = JSON.parse($("#con-json").value); }
+    catch(e){ msg("That isn’t valid JSON — check for a stray comma or quote."); return; }
+    try{
+      const gBlob = await encryptText(gpw, JSON.stringify(stripInternal(master)));
+      const iBlob = await encryptText(ipw, JSON.stringify(master));
+      $("#con-out-guest").value = gBlob;
+      $("#con-out-internal").value = iBlob;
+      msg("Done. Paste 3a into ENC_GUEST and 3b into ENC_INTERNAL, then commit.", true);
+    }catch(e){ msg("Encryption failed: " + e.message); }
+  });
+  const copyBox = async (id) => {
+    const v = $(id).value;
+    if (!v){ msg("Nothing to copy yet — encrypt first."); return; }
+    try{ await navigator.clipboard.writeText(v); msg("Copied to clipboard.", true); }
+    catch(e){ $(id).select(); msg("Select-all done — copy manually."); }
+  };
+  $("#con-pay-add").addEventListener("click", () => {
+    let master;
+    try{ master = JSON.parse($("#con-json").value); }
+    catch(e){ msg("Load the master sheet first (Load current, or Blank template)."); return; }
+    const amt = parseFloat($("#con-pay-amt").value);
+    if (!amt || amt <= 0){ msg("Enter a payment amount in USD."); return; }
+    if (!Array.isArray(master.payments)) master.payments = [];
+    master.payments.push({
+      date: $("#con-pay-date").value || new Date().toISOString().slice(0,10),
+      amount: amt,
+      label: $("#con-pay-label").value.trim() || "Payment"
+    });
+    $("#con-json").value = JSON.stringify(master, null, 2);
+    $("#con-pay-amt").value = ""; $("#con-pay-label").value = "";
+    msg("Payment added. Now tap ‘Encrypt & generate both blobs’.", true);
+  });
+  $("#con-copy-guest").addEventListener("click", () => copyBox("#con-out-guest"));
+  $("#con-copy-internal").addEventListener("click", () => copyBox("#con-out-internal"));
+}
 function init(){
-  var u=$("#stmt-unlock"); if(u) u.addEventListener("click",unlock);
-  var pw=$("#stmt-pw"); if(pw) pw.addEventListener("keydown",function(e){if(e.key==="Enter")unlock();});
-  ["click","touchstart","keydown","scroll"].forEach(function(ev){document.addEventListener(ev,function(){if(unlocked)arm();},{passive:true});});
+  $("#stmt-unlock").addEventListener("click", unlockStatement);
+  $("#stmt-pw").addEventListener("keydown", e => { if (e.key === "Enter") unlockStatement(); });
+  setupConsole();
+  ["click","touchstart","keydown","scroll"].forEach(ev =>
+    document.addEventListener(ev, () => { if (stmtUnlocked) armStmtTimer(); }, { passive:true }));
 }
-window.HCIStatement={init:init,lock:lock};
+window.HCIStatement = { init: init, lock: function(){ lockStatement(); } };
 })();
 </script>
 
