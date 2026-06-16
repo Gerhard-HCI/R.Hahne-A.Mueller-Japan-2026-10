@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0D2847">
-  <title>Hahne Mueller</title>
+  <title>Richard Hahne</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -443,6 +443,7 @@
     <button class="tab-btn active" data-tab="itinerary">Itinerary</button>
     <button class="tab-btn" data-tab="discover">Discover</button>
     <button class="tab-btn" data-tab="wishlist">Wish List</button>
+    <button class="tab-btn" data-tab="visited">Visited</button>
     <button class="tab-btn" data-tab="diet">Diet</button>
     <button class="tab-btn" data-tab="utilities">Utilities</button>
     <button class="tab-btn" data-tab="statement"><span class="lk">🔒</span> Statement</button>
@@ -454,6 +455,7 @@
   <div id="tab-itinerary" class="tab-panel active"></div>
   <div id="tab-discover"  class="tab-panel"></div>
   <div id="tab-wishlist"  class="tab-panel"></div>
+  <div id="tab-visited"   class="tab-panel"></div>
   <div id="tab-diet"      class="tab-panel"></div>
   <div id="tab-utilities" class="tab-panel"></div>
   <div id="tab-statement" class="tab-panel">
@@ -517,7 +519,7 @@
 'use strict';
 
 /* ═══ CONFIG · Hahne · 31 Oct – 14 Nov 2026 ═══ */
-var FX_RATE = 160.00;
+var FX_RATE = 185.90; // 1 EUR = 185.90 JPY (planning estimate, Jun 2026)
 
 /* ═══ TRIP DATA · Hahne · Kyushu → Hokuriku → Tokyo ═══
    Status legend matches the canvas: confirmed · requested · suggestion · self-booked */
@@ -640,6 +642,28 @@ var WL_SUGGESTIONS = [
 ];
 var WL_LONGTERM = [
   { name:'Tokyo · remaining days, built to taste', style:'Sushi · yakitori · yakiniku · kaiseki · Chinese · cocktail bars · harder-to-book rooms', q:'Tokyo' }
+];
+
+/* Restaurants the family has dined at over the past ~2 years (as recalled) */
+var VISITED = [
+  { name:'Kyota Hanare',      style:'Kaiseki · Tokyo',            q:'Kyota Hanare Tokyo' },
+  { name:'Myoujyaku',         style:'Kappo kaiseki · Tokyo',      q:'Myoujyaku Tokyo' },
+  { name:'Mizukami',          style:'Kaiseki · Tokyo',            q:'Mizukami Kagurazaka Tokyo' },
+  { name:'RyuGin',            style:'Modern kaiseki · Tokyo',     q:'Nihonryori RyuGin Tokyo' },
+  { name:'Azabu Kawakamian',  style:'Soba · Tokyo',               q:'Azabu Kawakamian Tokyo' },
+  { name:'Harutaka',          style:'Sushi · Tokyo',              q:'Sushi Harutaka Ginza Tokyo' },
+  { name:'Kanesaka',          style:'Sushi · Tokyo',              q:'Sushi Kanesaka Ginza Tokyo' },
+  { name:'Kusunoki',          style:'Kaiseki',                    q:'Kusunoki restaurant Japan' },
+  { name:'Shunsuke Asagaya',  style:'Sushi · Asagaya, Tokyo',     q:'Sushi Shunsuke Asagaya Tokyo' },
+  { name:'Bia',               style:'Fine dining',                q:'Bia restaurant Tokyo' },
+  { name:'Narisawa',          style:'Innovative · Tokyo',         q:'Narisawa Tokyo' },
+  { name:'MAZ',               style:'Modern Peruvian · Tokyo',    q:'MAZ Tokyo Azabudai' },
+  { name:'Kadowaki',          style:'Japanese · Azabu, Tokyo',    q:'Azabu Kadowaki Tokyo' },
+  { name:'L\u2019Effervescence', style:'Contemporary French · Tokyo', q:'L\u2019Effervescence Tokyo' },
+  { name:'Kondo',             style:'Tempura · Ginza, Tokyo',     q:'Tempura Kondo Ginza Tokyo' },
+  { name:'Hajime',            style:'Contemporary · Osaka',       q:'Hajime restaurant Osaka' },
+  { name:'Milpa',             style:'Fine dining',                q:'Milpa restaurant Japan' },
+  { name:'Sushi AO',          style:'Sushi · Kyoto',              q:'Sushi AO Kyoto' }
 ];
 
 /* ═══ DIET · none submitted yet ═══ */
@@ -1005,6 +1029,26 @@ function renderWishlist(){
   document.getElementById('tab-wishlist').innerHTML=h;
 }
 
+/* ═══ RENDER · VISITED ═══ */
+function renderVisited(){
+  function row(w,i){
+    var mapBtn=w.q?'<a href="'+gm(w.q)+'" target="_blank" rel="noopener" class="wish-map-btn">📍</a>':'';
+    return '<div class="wish-row'+(i>0?' wish-border':'')+'">'
+      +'<div class="wish-num" style="background:linear-gradient(135deg,#1B5E20,#0E3B14)">'+(i+1)+'</div>'
+      +'<div class="wish-info"><div class="wish-name">'+esc(w.name)+'</div>'
+      +'<div class="wish-style">'+esc(w.style)+'</div></div>'
+      +'<div class="wish-actions">'+mapBtn+'</div>'
+      +'</div>';
+  }
+  var h='<div class="wishlist-banner" style="background:linear-gradient(135deg,#16361C 0%,#0A220E 100%)">'
+    +'<h2>✓ Visited</h2><p>Where the family has dined · last ~2 years, as recalled</p></div>';
+  h+='<div class="section-label">🍽 '+VISITED.length+' restaurants</div>';
+  h+='<div class="wish-card" style="border-color:rgba(27,94,32,.25)">';
+  VISITED.forEach(function(w,i){h+=row(w,i);});
+  h+='</div>';
+  document.getElementById('tab-visited').innerHTML=h;
+}
+
 /* ═══ RENDER · DIET ═══ */
 function renderDiet(){
   var h='<div class="diet-banner"><h2>⚠ Dietary</h2><p>Shared with each restaurant in advance · updates as the guests confirm preferences</p></div>';
@@ -1056,12 +1100,12 @@ window.closeDietModal=function(){var m=document.getElementById('diet-modal');if(
 function renderUtilities(){
   document.getElementById('tab-utilities').innerHTML=''
     +'<div class="section-label">Currency Converter</div>'
-    +'<div class="util-card"><div class="util-card-title">JPY ↔ USD</div>'
+    +'<div class="util-card"><div class="util-card-title">JPY ↔ EUR</div>'
     +'<div class="fx-row">'
-    +'<div class="fx-group"><div class="fx-label">🇯🇵 Japanese Yen</div><input class="fx-input" id="fx-jpy" type="number" inputmode="numeric" value="10000"></div>'
+    +'<div class="fx-group"><div class="fx-label">🇯🇵 Japanese Yen</div><input class="fx-input" id="fx-jpy" type="text" inputmode="decimal" value="100.000,00"></div>'
     +'<button class="fx-swap-btn" id="fx-swap">⇋</button>'
-    +'<div class="fx-group"><div class="fx-label">🇺🇸 US Dollar</div><input class="fx-input" id="fx-usd" type="number" inputmode="decimal"></div>'
-    +'</div><div class="fx-rate-note">Rate: 1 USD = '+FX_RATE.toFixed(2)+' JPY · Source: planning canvas</div></div>'
+    +'<div class="fx-group"><div class="fx-label">🇪🇺 Euro</div><input class="fx-input" id="fx-eur" type="text" inputmode="decimal"></div>'
+    +'</div><div class="fx-rate-note">Kurs: 1 EUR = '+new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(FX_RATE)+' JPY · Planungskurs · Juni 2026</div></div>'
     +'<div class="section-label">Quick Reference</div>'
     +'<div class="util-card"><ul class="info-list">'
     +'<li><span class="info-emoji">💴</span><div class="info-text"><strong>Cash is useful</strong>Carry some yen — a few counters and the ryokan extras prefer cash. ATMs at 7-Eleven and Japan Post accept foreign cards.</div></li>'
@@ -1079,12 +1123,14 @@ function renderUtilities(){
     +'<div class="rule-item"><span class="rule-icon">💰</span><div class="rule-text"><strong>No Tipping</strong>Not customary in Japan. Say <em>Gochisousama deshita</em> after the meal — deeply appreciated.</div></div>'
     +'<div class="rule-item"><span class="rule-icon">🔒</span><div class="rule-text"><strong>Reservations are Firm</strong>Once confirmed, reservations are commitments — cancellations damage relationships built over many seasons.</div></div>'
     +'</div>';
-  var jEl=document.getElementById('fx-jpy'),uEl=document.getElementById('fx-usd');
-  function fJ(){var v=parseFloat(jEl.value);uEl.value=isNaN(v)?'':(v/FX_RATE).toFixed(2);}
-  function fU(){var v=parseFloat(uEl.value);jEl.value=isNaN(v)?'':String(Math.round(v*FX_RATE));}
+  var jEl=document.getElementById('fx-jpy'),uEl=document.getElementById('fx-eur');
+  function parseDE(s){if(s==null)return NaN;s=String(s).trim().replace(/\./g,'').replace(/,/g,'.');return s===''?NaN:parseFloat(s);}
+  function fmtDE(n){return isNaN(n)?'':new Intl.NumberFormat('de-DE',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);}
+  function fJ(){var v=parseDE(jEl.value);uEl.value=isNaN(v)?'':fmtDE(v/FX_RATE);}
+  function fU(){var v=parseDE(uEl.value);jEl.value=isNaN(v)?'':fmtDE(v*FX_RATE);}
   jEl.addEventListener('input',fJ);uEl.addEventListener('input',fU);
   document.getElementById('fx-swap').addEventListener('click',function(){
-    var t=jEl.value;jEl.value=uEl.value?String(Math.round(parseFloat(uEl.value)*FX_RATE)):'';uEl.value=t?(parseFloat(t)/FX_RATE).toFixed(2):'';
+    var t=jEl.value;jEl.value=uEl.value?fmtDE(parseDE(uEl.value)*FX_RATE):'';uEl.value=t?fmtDE(parseDE(t)/FX_RATE):'';
   });
   fJ();
 }
@@ -1129,6 +1175,7 @@ function init(){
   renderItinerary();
   renderDiscover();
   renderWishlist();
+  renderVisited();
   renderDiet();
   renderUtilities();
   renderEmergency();
