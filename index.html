@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0D2847">
-  <title>Richard Hahne</title>
+  <title>Hahne Mueller</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -674,95 +674,273 @@ var DIET_JP = [];
 /* ═══ DISCOVER ═══ */
 var DISCOVER = {
   Fukuoka:[
-    { cat:'Sightseeing', items:[
-      ['Ohori Park & Japanese Garden','Ohori Park Fukuoka','A lake-park in the centre — easy morning walk'],
-      ['Kushida Shrine','Kushida Shrine Fukuoka','The city\u0027s guardian shrine, home of the Hakata float festival'],
-      ['Canal City Hakata','Canal City Hakata Fukuoka','Waterway shopping & dining complex'],
-      ['Nakasu by night','Nakasu Fukuoka','Neon island of bars and yatai street stalls']
+    { cat:"Sightseeing", items:[
+      ["Ohori Park","Ohori Park Fukuoka","Lakeside park, walking loop, Japanese garden; art museum adjacent"],
+      ["Fukuoka Castle Ruins (Maizuru Park)","Fukuoka Castle Ruins","Kuroda-clan castle walls; famous cherry blossoms"],
+      ["Dazaifu Tenmangu","Dazaifu Tenmangu","Shrine to the god of learning; plum trees; ~30 min out"],
+      ["Kushida Shrine","Kushida Shrine Fukuoka","Fukuoka's guardian shrine; Hakata Gion Yamakasa float"],
+      ["Tocho-ji (Fukuoka Daibutsu)","Tochoji Fukuoka","Temple with a large seated wooden Buddha"],
+      ["Canal City Hakata","Canal City Hakata","Mall/entertainment complex with canal fountain shows"],
+      ["Fukuoka Tower","Fukuoka Tower","234 m seaside tower with observation deck"],
+      ["Nanzo-in Reclining Buddha","Nanzoin Sasaguri","Giant bronze reclining Buddha; ~25 min out"],
+      ["Fukuoka Art Museum","Fukuoka Art Museum","Renovated museum: Dali, Miro, Buddhist art"],
+      ["Kawabata / Nakasu riverside","Nakasu Fukuoka","Atmospheric river-island nightlife & yatai zone"]
     ]},
-    { cat:'Food & Drink', items:[
-      ['Yatai street stalls · Nakasu/Tenjin','Nakasu yatai Fukuoka','Open-air stalls for ramen, oden and yakitori'],
-      ['Hakata tonkotsu ramen','Hakata ramen Fukuoka','The pork-bone broth the city is famous for'],
-      ['Motsunabe (offal hotpot)','motsunabe Fukuoka','A Fukuoka winter specialty'],
-      ['Mentaiko (spicy cod roe)','mentaiko Fukuoka','The local delicacy — easy to take home']
+    { cat:"Food & Drink", items:[
+      ["Yatai street stalls","Nakasu Yatai","Open-air riverside food stalls \u2014 Fukuoka icon"],
+      ["Hakata tonkotsu ramen","Hakata ramen Fukuoka","Rich pork-bone ramen (Ichiran, Ippudo origin)"],
+      ["Motsunabe","Motsunabe Fukuoka","Offal & cabbage hot pot \u2014 Fukuoka specialty"],
+      ["Mizutaki","Mizutaki Fukuoka","Delicate chicken hot pot (Hakata Hamada-ya, Suigetsu)"],
+      ["Mentaiko","Mentaiko Fukuoka","Spicy marinated cod roe \u2014 regional signature"],
+      ["Hitokuchi gyoza","Tetsunabe gyoza Fukuoka","Bite-size crispy gyoza (Tetsunabe)"],
+      ["Goma-saba","Goma saba Fukuoka","Sesame-marinated raw mackerel \u2014 izakaya staple"],
+      ["Hakata udon","Hakata udon","Soft udon with gobo-ten (Daichi no Udon)"],
+      ["High-end sushi","Sushi Sakai Fukuoka","Strong sushi scene (Sushi Sakai, Gyoten, Kai)"],
+      ["Sake & shochu bars","izakaya Tenjin Fukuoka","Kyushu sake & shochu izakaya"]
+    ]},
+    { cat:"Shopping", items:[
+      ["Tenjin district","Tenjin Fukuoka","Downtown shopping core; department stores & fashion"],
+      ["Tenjin Chikagai","Tenjin Chikagai","Elegant European-style underground arcade"],
+      ["Daimaru Fukuoka Tenjin","Daimaru Fukuoka Tenjin","Major department store with depachika"],
+      ["Iwataya / Mitsukoshi","Iwataya Fukuoka","Flagship department stores"],
+      ["JR Hakata City / Amu Plaza","Amu Plaza Hakata","Station mall: fashion, Tokyu Hands, dining"],
+      ["Kawabata Shotengai","Kawabata Shotengai Fukuoka","Hakata's oldest covered shopping arcade"],
+      ["Hakata-ori textiles","Hakata Ori textile shop","Traditional silk weaving (obi); Hakata Hanori etc."],
+      ["Hakata dolls (Hakata ningyo)","Hakata ningyo shop","Hand-painted clay-doll craft"],
+      ["PARCO Fukuoka","Fukuoka Parco","Youth fashion & lifestyle"],
+      ["Fukuya (mentaiko)","Fukuya Nakasu Honten","Originator of Hakata mentaiko; gift packs"]
     ]}
   ],
   Kumamoto:[
-    { cat:'Sightseeing', items:[
-      ['Kumamoto Castle','Kumamoto Castle','One of Japan\u0027s great castles — restoration ongoing'],
-      ['Suizenji Jojuen Garden','Suizenji Jojuen Kumamoto','A strolling garden tracing the old Tokaido road'],
-      ['Sakuranobaba Josaien','Sakuranobaba Josaien Kumamoto','Castle-town street of crafts and snacks']
+    { cat:"Sightseeing", items:[
+      ["Kumamoto Castle","Kumamoto Castle","One of Japan's great castles; post-quake restoration"],
+      ["Suizenji Jojuen Garden","Suizenji Jojuen","Strolling garden; miniature Tokaido & Mt Fuji"],
+      ["Sakura-no-baba Josaien","Sakuranobaba Josaien","Castle-town themed dining & souvenir village"],
+      ["Mt. Aso","Mount Aso crater","Active volcano in one of the world's largest calderas"],
+      ["Kato Shrine","Kato Shrine Kumamoto","Shrine to Kato Kiyomasa; best castle views"],
+      ["Reigando Cave","Reigando Unganzenji","Cave where Musashi wrote 'The Book of Five Rings'"],
+      ["Tatsuda Nature Park","Tatsuda Nature Park Kumamoto","Hosokawa-clan garden, temple & teahouse"],
+      ["Hosokawa Gyobutei","Hosokawa Gyobutei","Restored high-ranking samurai residence"],
+      ["Kurokawa Onsen","Kurokawa Onsen","Celebrated atmospheric hot-spring town"],
+      ["Kumamoto City Contemporary Art Museum","Kumamoto Contemporary Art Museum","Free-spirited contemporary art space downtown"]
     ]},
-    { cat:'Food', items:[
-      ['Basashi (horse sashimi)','basashi Kumamoto','The regional specialty — Sakuraan elevates it'],
-      ['Karashi renkon','karashi renkon Kumamoto','Mustard-stuffed lotus root, fried']
+    { cat:"Food & Drink", items:[
+      ["Basashi (horse sashimi)","Basashi Kumamoto","Kumamoto signature; sakura-niku (Suganoya, Sakuraan)"],
+      ["Karashi renkon","Karashi renkon","Mustard-stuffed fried lotus root"],
+      ["Taipi-en","Taipien Kumamoto","Glass-noodle Chinese-style soup \u2014 local comfort food"],
+      ["Aso akaushi (red beef)","Akaushi don Kumamoto","Lean Aso red wagyu; akaushi-don"],
+      ["Kumamoto ramen","Kumamoto ramen","Tonkotsu with fried-garlic oil (mayu)"],
+      ["Ikinari dango","Ikinari dango Kumamoto","Sweet-potato & bean dumpling \u2014 local snack"],
+      ["Dengaku (Aso)","Dengaku Aso Kumamoto","Miso-glazed skewers grilled over the hearth"],
+      ["Kuma shochu","Kuma shochu","Protected-origin rice shochu"],
+      ["Suganoya","Suganoya Kumamoto","Long-running specialist basashi restaurant"],
+      ["Hikari no Mori / sushi & local izakaya","izakaya Kamitori Kumamoto","Kamitori/Shimotori izakaya for local dishes"]
+    ]},
+    { cat:"Shopping", items:[
+      ["Shimotori Arcade","Shimotori Kumamoto","Main covered shopping street"],
+      ["Kamitori Arcade","Kamitori Kumamoto","Boutique & culture-leaning arcade"],
+      ["Tsuruya Department Store","Tsuruya Department Store Kumamoto","Kumamoto's flagship department store"],
+      ["COCOSA","COCOSA Kumamoto","Downtown lifestyle mall"],
+      ["Kumamon Square","Kumamon Square","Official Kumamon mascot shop & stage"],
+      ["Amu Plaza Kumamoto","Amu Plaza Kumamoto","Station shopping complex (since 2021)"],
+      ["Higo zogan","Higo zogan shop Kumamoto","Inlaid black-steel & gold metal craft (accessories)"],
+      ["Yamaga toro (gold lanterns)","Yamaga Toro Kumamoto","Gold paper-lantern craft (nearby Yamaga)"],
+      ["Sakura-no-baba souvenir stalls","Sakuranobaba Josaien shops","Local crafts, sweets & specialty foods"],
+      ["Karashi renkon shops","Karashi renkon Kumamoto","Vacuum-packed specialty to take home (Morita)"]
     ]}
   ],
   Kagoshima:[
-    { cat:'Sightseeing', items:[
-      ['Sakurajima volcano','Sakurajima Kagoshima','The smoking volcano across the bay — ferry over'],
-      ['Sengan-en Garden','Sengan-en Kagoshima','Daimyo garden with Sakurajima as borrowed scenery'],
-      ['Shiroyama Observatory','Shiroyama Observatory Kagoshima','Panorama over city, bay and volcano']
+    { cat:"Sightseeing", items:[
+      ["Sakurajima","Sakurajima","Active volcano; lava trails & viewpoints"],
+      ["Sengan-en (Iso Garden)","Sengan-en Kagoshima","Shimazu garden with Sakurajima as borrowed scenery"],
+      ["Shiroyama Observatory","Shiroyama Observatory Kagoshima","Panorama of city & Sakurajima"],
+      ["Io World Aquarium","Kagoshima Aquarium Io World","Aquarium with whale sharks"],
+      ["Sakurajima Ferry","Sakurajima Ferry Terminal","15-min crossing to the volcano"],
+      ["Museum of the Meiji Restoration","Museum Meiji Restoration Kagoshima","Satsuma history; Saigo & Okubo"],
+      ["Reimeikan","Reimeikan Kagoshima","Prefectural history & culture museum (Tsurumaru)"],
+      ["Yunohira Observatory","Yunohira Observatory Sakurajima","Closest viewpoint on the volcano"],
+      ["Ibusuki sand baths","Ibusuki Sunamushi Onsen","Natural hot-sand bathing on the beach"],
+      ["Chiran Samurai District & Peace Museum","Chiran Samurai Residence","Samurai gardens; WWII kamikaze museum"]
     ]},
-    { cat:'Food & Drink', items:[
-      ['Kurobuta black pork','kurobuta Kagoshima','Shabu-shabu and tonkatsu — Ajimori is the benchmark'],
-      ['Satsuma-age & kibinago','Kagoshima satsuma-age','Fish cakes and silver-stripe round herring'],
-      ['Imo-jochu (sweet-potato shochu)','imo shochu Kagoshima','Kagoshima is the heart of shochu culture']
+    { cat:"Food & Drink", items:[
+      ["Kurobuta (black pork)","Kurobuta Kagoshima","Berkshire pork shabu/tonkatsu (Ajimori)"],
+      ["Satsuma-age","Satsuma age","Deep-fried fish cake"],
+      ["Imo-jochu","Imo shochu Kagoshima","Sweet-potato shochu \u2014 Kagoshima heartland"],
+      ["Shirokuma","Mujaki Tenmonkan shirokuma","Shaved ice w/ fruit & condensed milk (Mujaki)"],
+      ["Kibinago sashimi","Kibinago Kagoshima","Silver-stripe round herring, chrysanthemum-cut"],
+      ["Keihan","Keihan Kagoshima","Chicken-over-rice with broth (Amami origin)"],
+      ["Kurozu (black vinegar)","Fukuyama kurozu Kagoshima","Pot-brewed black rice vinegar; tasting & dishes"],
+      ["Tonkotsu (simmered ribs)","Kagoshima tonkotsu ryori","Pork ribs simmered in shochu & miso"],
+      ["Jambo-mochi","Jambo mochi Kagoshima","Twin-skewered sweet mochi (Sengan-en)"],
+      ["Kagoshima ramen","Kagoshima ramen","Semi-cloudy tonkotsu ramen"]
+    ]},
+    { cat:"Shopping", items:[
+      ["Tenmonkan","Tenmonkan Kagoshima","Main shopping & entertainment arcades"],
+      ["Amu Plaza Kagoshima","Amu Plaza Kagoshima","Station mall with Ferris wheel"],
+      ["Yamakataya","Yamakataya Kagoshima","Historic landmark department store"],
+      ["Maruya Gardens","Maruya Gardens Kagoshima","Design-led department store"],
+      ["Satsuma Kiriko cut glass","Satsuma Kiriko Sengan-en","Coloured cut-glass craft (Satsuma Glass Craft)"],
+      ["Satsuma ware pottery","Chin Jukan Satsuma ware","Refined white & black Satsuma ceramics (Chin Jukan)"],
+      ["Kagoshima Brand Shop","Kagoshima Brand Shop","Prefectural specialties under one roof"],
+      ["Akashiya (karukan)","Akashiya karukan Kagoshima","Karukan steamed yam confection \u2014 classic gift"],
+      ["Satsuma-age shops","Satsuma age Kagoshima","Fried fish cake to take home (Agetateya)"],
+      ["Imo-jochu shops","imo shochu shop Kagoshima","Sweet-potato shochu specialty stores"]
     ]}
   ],
   Kanazawa:[
-    { cat:'Sightseeing', items:[
-      ['Kenroku-en Garden','Kenrokuen Garden Kanazawa','One of the three great gardens of Japan'],
-      ['Higashi Chaya District','Higashi Chaya Kanazawa','Preserved geisha teahouse streets'],
-      ['Omicho Market','Omicho Market Kanazawa','The city\u0027s kitchen — crab, sweet shrimp, sea bream'],
-      ['21st Century Museum of Art','21st Century Museum Kanazawa','SANAA\u0027s circular glass museum'],
-      ['Nagamachi samurai district','Nagamachi Kanazawa','Earthen-walled former samurai lanes']
+    { cat:"Sightseeing", items:[
+      ["Kenroku-en","Kenrokuen Kanazawa","One of Japan's three great landscape gardens"],
+      ["Kanazawa Castle Park","Kanazawa Castle Park","Restored castle grounds beside Kenroku-en"],
+      ["Higashi Chaya District","Higashi Chaya District Kanazawa","Preserved geisha teahouse quarter; gold-leaf shops"],
+      ["21st Century Museum of Contemporary Art","21st Century Museum Kanazawa","SANAA building; Leandro Erlich Swimming Pool"],
+      ["Nagamachi Samurai District","Nagamachi Samurai District","Earthen-walled samurai lanes (Nomura House)"],
+      ["Omicho Market","Omicho Market Kanazawa","Lively seafood & produce market"],
+      ["Myoryu-ji (Ninja Temple)","Myoryuji Ninja Temple","Trick doors, hidden stairs & passages"],
+      ["Kazue-machi & Nishi Chaya","Kazuemachi Chaya District","Smaller, atmospheric teahouse quarters"],
+      ["D.T. Suzuki Museum","DT Suzuki Museum Kanazawa","Contemplative Zen architecture & water court"],
+      ["Kanazawa Station Tsuzumi Gate","Kanazawa Station Tsuzumi Gate","Iconic drum-shaped wooden gate"]
     ]},
-    { cat:'Food & Drink', items:[
-      ['Omicho seafood bowls','Omicho Market Kanazawa','Kaisen-don at the source'],
-      ['Jibuni (duck & wheat-gluten stew)','jibuni Kanazawa','The classic Kaga home dish'],
-      ['Hokuriku sake','Kanazawa sake brewery','Deep sake culture across Ishikawa']
+    { cat:"Food & Drink", items:[
+      ["Omicho kaisendon","Omicho Market kaisendon","Fresh seafood rice bowls in the market"],
+      ["Sushi","Sushi Kanazawa","Top Hokuriku sushi (Otome-zushi, Mekumi nearby)"],
+      ["Jibuni","Jibuni Kanazawa","Duck & wheat-gluten stew \u2014 Kaga cuisine"],
+      ["Kaga ryori","Kaga ryori Kanazawa","Refined local cuisine (Tsubajin, Zeniya)"],
+      ["Nodoguro","Nodoguro Kanazawa","Prized blackthroat seaperch \u2014 grilled or sushi"],
+      ["Kanazawa oden","Kanazawa oden","Local oden with crab-shell 'kani-men'"],
+      ["Gold-leaf soft serve","Gold leaf ice cream Kanazawa","Gilded ice cream \u2014 Higashi Chaya novelty"],
+      ["Kanazawa curry","Kanazawa curry","Thick dark curry on a plate (Champion, Gold)"],
+      ["Wagashi & matcha","Wagashi Kanazawa","One of Japan's three great wagashi cities"],
+      ["Sake \u2014 Fukumitsuya","Fukumitsuya Kanazawa","Kanazawa's oldest brewery; tasting salon"]
     ]},
-    { cat:'Craft & Shopping', items:[
-      ['Gold leaf (kinpaku)','gold leaf Kanazawa','Kanazawa makes nearly all of Japan\u0027s gold leaf'],
-      ['Kutani porcelain & Kaga yuzen','Kutani ware Kanazawa','Bold overglaze porcelain and silk dyeing']
+    { cat:"Shopping", items:[
+      ["Gold leaf (kinpaku) \u2014 Hakuza/Hakuichi","Hakuza Kanazawa gold leaf","City makes ~99% of Japan's gold leaf; goods & gilding"],
+      ["Kutani ware","Kutani ware Kanazawa","Vivid overglaze porcelain"],
+      ["Kaga Yuzen silk","Kaga Yuzen Kanazawa","Hand-painted kimono dyeing; Kaga Yuzen Center"],
+      ["Ohi ware","Ohi Museum Kanazawa","Raku-style amber pottery (Ohi Museum)"],
+      ["Korinbo & Katamachi","Korinbo Kanazawa","Downtown shopping; Daiwa department store"],
+      ["Kanazawa lacquerware","Kanazawa lacquerware shop","Refined maki-e lacquer craft"],
+      ["Hakuichi gold-leaf gallery","Hakuichi Higashiyama","Gold-leaf cosmetics, tableware, gilded soft-serve"],
+      ["Kanazawa Station 'Anto'","Kanazawa Anto souvenir","Souvenir hall: wagashi, crafts, local foods"],
+      ["Morihachi (wagashi)","Morihachi Kanazawa","Historic confectioner since 1625"],
+      ["Omicho Market (to ship/take)","Omicho Market Kanazawa","Crab & seafood packed for travel"]
     ]}
   ],
   Toyama:[
-    { cat:'Sightseeing', items:[
-      ['Toyama Glass Art Museum','Toyama Glass Art Museum','A luminous Kengo Kuma building'],
-      ['Toyama Bay & the coast','Toyama Bay','One of the richest fishing grounds in Japan'],
-      ['Iwase old town','Iwase Toyama','A canal-port quarter of sake breweries and craft']
+    { cat:"Sightseeing", items:[
+      ["Toyama Glass Art Museum (Kirari)","Toyama Glass Art Museum","Kengo Kuma building; permanent Chihuly glass"],
+      ["Toyama Castle & Park","Toyama Castle Park","Castle-ruin keep, garden & local museum"],
+      ["Fugan Unga Kansui Park","Kansui Park Toyama Starbucks","Canal park; the 'world's most beautiful Starbucks'"],
+      ["Toyama Pref. Museum of Art & Design (TAD)","Toyama Museum Art Design","Design-led art museum with rooftop play space"],
+      ["Iwase historic port town","Iwase Toyama old town","Edo-era merchant street; Masuda sake brewery"],
+      ["Kurobe Gorge Railway","Kurobe Gorge Railway","Scenic open-car train (autumn colours; seasonal)"],
+      ["Tateyama Kurobe Alpine Route","Tateyama Kurobe Alpine Route","High-mountain crossing; Snow Wall (seasonal)"],
+      ["Gokayama gassho villages","Gokayama Ainokura","UNESCO thatched-roof hamlets (Ainokura, Suganuma)"],
+      ["Zuiryu-ji (Takaoka)","Zuiryuji Takaoka","National-Treasure Zen temple"],
+      ["Amaharashi Coast","Amaharashi Coast","Tateyama peaks rising over the sea"]
     ]},
-    { cat:'Food', items:[
-      ['Shiroebi (white shrimp)','shiroebi Toyama','The bay\u0027s prized delicacy — sweet and delicate'],
-      ['Masuzushi (trout pressed sushi)','masuzushi Toyama','The famous Toyama station specialty'],
-      ['Kanburi (winter yellowtail)','buri Toyama','Cold-season yellowtail at its peak']
+    { cat:"Food & Drink", items:[
+      ["Shiroebi (white shrimp)","Shiroebitei Toyama","Sashimi/tempura/don (Shiroebitei)"],
+      ["Sushi","Sushi Toyama","Top sushi city \u2014 'Toyama Sushi' (Sushitama, Kito Kito)"],
+      ["Hotaruika (firefly squid)","Hotaruika Toyama","Spring delicacy; boiled, sashimi or marinated"],
+      ["Buri (yellowtail)","Himi buri Toyama","Prized winter Himi buri"],
+      ["Masuzushi","Masuzushi Toyama","Pressed trout sushi in bamboo leaf"],
+      ["Toyama Black Ramen","Toyama Black ramen Iroha","Soy-pepper jet-black ramen (Menya Iroha)"],
+      ["Kobujime","Kobujime Toyama","Kelp-cured sashimi \u2014 Toyama uses the most kombu"],
+      ["Benizuwai crab","Benizuwai crab Toyama","Sweet red snow crab in season"],
+      ["Iwase sake dining","Iwase Toyama sake dining","Masuizumi brewery + restaurants in old town"],
+      ["Toyama Bay kaisendon","Toyama kaisendon","Bay seafood bowls at Kitokito/markets"]
+    ]},
+    { cat:"Shopping", items:[
+      ["Toyama glass","Toyama Glass Studio shop","'City of glass'; studio shop & artist pieces"],
+      ["Takaoka copperware \u2014 Nousaku","Nousaku Takaoka","Bendable tin & cast-brass tableware"],
+      ["Masuzushi \u2014 Minamoto","Minamoto Masuzushi Toyama","Pressed trout sushi; the classic souvenir"],
+      ["Shiroebi senbei \u2014 Hinodeya","Shiroebi senbei Toyama","White-shrimp rice crackers"],
+      ["Toyama medicine \u2014 Ikedaya Yasubei","Ikedaya Yasubei Toyama","Historic kanpo medicine; pill-rolling demo"],
+      ["Gokayama washi","Gokayama washi","Sturdy handmade paper goods"],
+      ["Inami woodcarving","Inami woodcarving","Ornate sculptural woodwork"],
+      ["Local sake \u2014 Masuizumi (Masuda)","Masuizumi Masuda Shuzo Iwase","Premium Iwase sake brewery & shop"],
+      ["Toyama Station Marche / Kitokito","Toyamarche Toyama Station","Souvenirs: seafood, sake, sweets"],
+      ["Kamaboko (fish cake)","Toyama kamaboko","Decorative & rolled fish-cake gifts (Umaimon)"]
+    ]}
+  ],
+  Komatsu:[
+    { cat:"Sightseeing", items:[
+      ["Natadera Temple","Natadera Komatsu","717-founded mountain temple; caves, autumn colour"],
+      ["Yunokuni no Mori (Kaga Crafts Village)","Yunokuni no Mori Komatsu","50+ hands-on craft experiences in a forest village"],
+      ["Awazu Onsen","Awazu Onsen","Ancient hot-spring resort (Hoshi Ryokan, est. 718)"],
+      ["Hanibe Gankutsuin","Hanibe Gankutsuin Komatsu","Surreal cave temple with giant Buddha figures"],
+      ["Komatsu (Komatsunomori) machine museum","Komatsunomori Komatsu","Giant dump truck & maker museum at the station"],
+      ["Ataka-no-seki & Sumiyoshi Shrine","Ataka no Seki Komatsu","Benkei/Kanjincho legend by the sea"],
+      ["Science Hills Komatsu","Science Hills Komatsu","Hands-on science dome & 3D theatre"],
+      ["Hiyou-no-mori Moss Garden","Koke no Sato Komatsu","Serene moss garden in a cedar grove"],
+      ["Junigataki Waterfalls","Junigataki Komatsu","Series of small cascades; quiet nature stop"],
+      ["Yamanaka & Yamashiro Onsen","Yamanaka Onsen Kaga","Famous Kaga onsen towns; Kakusenkei gorge walk"]
+    ]},
+    { cat:"Food & Drink", items:[
+      ["Komatsu udon","Komatsu udon","Historic thin udon, loved by poet Basho"],
+      ["Auberge Eaufeu","Auberge Eaufeu Komatsu","Countryside fine-dining auberge with rooms"],
+      ["Hatadate / Kaga seafood","Kaga cuisine Komatsu","Sea-of-Japan seafood: snow crab, nodoguro"],
+      ["Kaga vegetables (kaga-yasai)","Kaga yasai cuisine","Heirloom vegetables in local kaiseki"],
+      ["Awazu Onsen kaiseki","Awazu Onsen ryokan kaiseki","Ryokan kaiseki dinners (Hoshi, Nobeyu)"],
+      ["Hapogama / Kutani-served dining","Kutani ware dining Komatsu","Local cuisine served on Kutani ware"],
+      ["Jibuni & Kaga ryori","Kaga ryori Komatsu","Kaga-style duck stew & refined local dishes"],
+      ["Snow crab (zuwaigani)","zuwaigani Kaga","Echizen/Kaga snow crab in season (Nov+)"],
+      ["Local sake tasting","Komatsu sake tasting","Hokuriku junmai sake with seafood"],
+      ["Nodoguro","Nodoguro Ishikawa","Blackthroat seaperch \u2014 grilled or sushi"]
+    ]},
+    { cat:"Shopping", items:[
+      ["Kutani ware","Kutani ware Komatsu","Heart of Kutani porcelain country; kilns & shops"],
+      ["Yunokuni no Mori craft shops","Yunokuni no Mori shop","Gold leaf, Kutani, Wajima lacquer, glass"],
+      ["Komatsu gold leaf & lacquer","Ishikawa gold leaf Komatsu","Ishikawa gold-leaf & lacquerware goods"],
+      ["AEON Mall Shin-Komatsu","AEON Mall Shin Komatsu","Largest everyday shopping mall in town"],
+      ["Komatsu Utamaro / station souvenirs","Komatsu Station souvenir","Local sweets, sake, Kaga crafts"],
+      ["Kaga silk & Yuzen goods","Kaga Yuzen Komatsu","Kaga Yuzen-dyed textiles & accessories"],
+      ["Awazu Onsen craft stalls","Awazu Onsen shops","Onsen-town craft & confection stalls"],
+      ["Kutani Kosengama / kilns","Kutani kiln Nomi","Working Kutani kilns & galleries nearby"],
+      ["Local sake breweries","sake brewery Komatsu Ishikawa","Hokuriku sake (Tedorigawa nearby)"],
+      ["Michi-no-Eki Komatsu","Michi no Eki Komatsu","Roadside market: produce, crafts, snacks"]
     ]}
   ],
   Tokyo:[
-    { cat:'Sightseeing', items:[
-      ['Senso-ji & Asakusa','Senso-ji Temple Asakusa Tokyo','Tokyo\u0027s oldest temple and its backstreets'],
-      ['Meiji Shrine & Yoyogi','Meiji Shrine Tokyo','Forest shrine beside Harajuku'],
-      ['teamLab museums','teamLab Tokyo','Immersive digital-art worlds'],
-      ['Shibuya Sky','Shibuya Sky Tokyo','Open-air deck over the crossing'],
-      ['Nezu Museum · Aoyama','Nezu Museum Tokyo','Asian art in a Kengo Kuma building with a garden café']
+    { cat:"Sightseeing", items:[
+      ["Senso-ji & Asakusa","Sensoji Asakusa","Tokyo's oldest temple; Nakamise shopping street"],
+      ["Meiji Jingu","Meiji Jingu","Forest shrine beside Yoyogi Park"],
+      ["Shibuya Crossing & Shibuya Sky","Shibuya Sky","Iconic scramble + rooftop observation deck"],
+      ["teamLab (Planets / Borderless)","teamLab Planets Tokyo","Immersive digital-art museums"],
+      ["Imperial Palace East Gardens","Imperial Palace East Gardens","Former Edo Castle grounds & gardens"],
+      ["Tokyo Skytree","Tokyo Skytree","634 m tower; observation decks & Solamachi"],
+      ["Toyosu Market & Tsukiji Outer Market","Tsukiji Outer Market","Fish auction & legendary street-food lanes"],
+      ["Shinjuku Gyoen","Shinjuku Gyoen","Expansive garden; superb autumn foliage"],
+      ["Nezu Museum","Nezu Museum Tokyo","Asian art & a serene strolling garden"],
+      ["Ueno Park & museums","Ueno Park","Tokyo National Museum, zoo, galleries"]
     ]},
-    { cat:'Food & Drink', items:[
-      ['Toyosu Market (outer)','Toyosu Market Tokyo','Sushi breakfasts at the fish market'],
-      ['Ginza depachika','Ginza Mitsukoshi depachika Tokyo','Extraordinary basement food halls'],
-      ['Bar High Five · Ginza','Bar High Five Ginza Tokyo','Master bartending, classic cocktails'],
-      ['Koffee Mameya · Omotesando','Koffee Mameya Omotesando Tokyo','Precise single-origin pour-overs']
+    { cat:"Food & Drink", items:[
+      ["Sushi","Sushi Ginza Tokyo","Toyosu counters to Ginza omakase (Saito, Sugita)"],
+      ["Tempura","Tempura Tokyo","Edomae tempura (Kondo, Mikawa Zezankyo)"],
+      ["Yakitori","Yakitori Tokyo","Omoide Yokocho to high-end (Torishiki)"],
+      ["Yakiniku & wagyu","Yakiniku Tokyo wagyu","Premium grilled wagyu (Yoroniku, Toraji)"],
+      ["Ramen","Ramen Tokyo","Every style; shoyu, tsukemen, tonkotsu"],
+      ["Kaiseki / haute Japanese","Kaiseki Tokyo","RyuGin, Ishikawa, Den \u2014 modern & classic"],
+      ["Depachika food halls","Isetan depachika","Basement gourmet halls (Isetan, Takashimaya)"],
+      ["Cocktail bars","Bar High Five Ginza","World-class bars (High Five, Star Bar, SG Club)"],
+      ["Unagi","Unagi Nodaiwa Tokyo","Eel specialists (Nodaiwa, Obana)"],
+      ["Soba","Soba Kanda Matsuya Tokyo","Handmade soba (Sarashina, Kanda Matsuya)"]
     ]},
-    { cat:'Shopping', items:[
-      ['Ginza flagships','Ginza Tokyo','Department stores and maker boutiques'],
-      ['Omotesando & Aoyama','Omotesando Tokyo','Flagship architecture and design'],
-      ['Kappabashi kitchen street','Kappabashi Tokyo','Knives, ceramics, kitchenware'],
-      ['Tsutaya Books · Daikanyama','Tsutaya Daikanyama Tokyo','A beautiful bookshop and café complex']
+    { cat:"Shopping", items:[
+      ["Ginza","Ginza Tokyo","Luxury flagships; Ginza Six, Wako, Mitsukoshi"],
+      ["Isetan Shinjuku","Isetan Shinjuku","Japan's flagship department store; famed depachika"],
+      ["Nihonbashi (Mitsukoshi/Takashimaya)","Nihonbashi Mitsukoshi","Historic department-store district"],
+      ["Omotesando & Aoyama","Omotesando","Fashion & architecture flagships"],
+      ["Daikanyama T-Site (Tsutaya)","Daikanyama Tsutaya","Design-led bookstore & lifestyle complex"],
+      ["Nakameguro","Nakameguro","Canal-side boutiques & cafes"],
+      ["Kappabashi Kitchen Town","Kappabashi Tokyo","Knives, kitchenware & sample food"],
+      ["Akihabara","Akihabara","Electronics, anime & hobby shops"],
+      ["Ginza Wako / Mikimoto","Ginza Wako","Landmark clock, watches & pearls"],
+      ["Miyashita Park / Shibuya Parco","Miyashita Park Shibuya","Rooftop park + fashion & lifestyle floors"]
     ]}
   ]
 };
-var DISCOVER_CITIES = ['Fukuoka','Kumamoto','Kagoshima','Kanazawa','Toyama','Tokyo'];
+var DISCOVER_CITIES = ["Fukuoka","Kumamoto","Kagoshima","Kanazawa","Toyama","Komatsu","Tokyo"];
 var DISCOVER_ACTIVE = 'Fukuoka';
 
 /* ═══ HELPERS ═══ */
