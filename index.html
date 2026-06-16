@@ -341,6 +341,16 @@
   background:#2E4257;color:#fff;border-radius:11px;padding:0 18px;min-height:48px;min-width:48px;}
 #tab-statement .btn:active{background:#243648;}
 .lock-err{color:#B5474F;font-size:12.5px;margin-top:13px;min-height:16px;}
+    .stmt-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid var(--border-lt);}
+    .stmt-row:last-child{border-bottom:none;}
+    .stmt-label{font-size:13px;color:var(--ink-2);font-weight:500;}
+    .stmt-note{font-size:11px;color:var(--ink-4);font-weight:400;margin-top:2px;}
+    .stmt-val{font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap;}
+    .stmt-pending{font-size:11.5px;color:var(--ink-4);font-style:italic;font-weight:400;}
+    .stmt-sub .stmt-label,.stmt-sub .stmt-val{color:var(--ink-3);font-weight:500;}
+    .stmt-total{border-top:2px solid var(--border);margin-top:2px;padding-top:13px;}
+    .stmt-total .stmt-label{font-weight:700;color:var(--ink);font-size:14px;}
+    .stmt-total .stmt-val{font-size:17px;color:var(--navy);}
 .lock-hint{font-size:11px;color:#6E655A;margin-top:18px;}
 .stmt-head{padding:18px 16px 4px;}
 .stmt-as{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6E655A;}
@@ -447,11 +457,20 @@
   <div id="tab-diet"      class="tab-panel"></div>
   <div id="tab-utilities" class="tab-panel"></div>
   <div id="tab-statement" class="tab-panel">
-    <div class="emergency-banner" style="margin-bottom:14px"><h2>Statement</h2><p>Itemised charges &amp; balance &middot; private to the lead guest</p></div>
-    <div class="util-card"><ul class="info-list">
-      <li><span class="info-emoji">🧾</span><div class="info-text"><strong>Not yet itemised</strong>At this planning stage the flow is being agreed; only the arrangement structure is set. Your running statement — restaurants, activities, transfers and balance — will appear here once the regional requests go out and charges are confirmed.</div></li>
-      <li><span class="info-emoji">💱</span><div class="info-text"><strong>Currency</strong>Figures will be shown in USD. Planning rate this canvas: 1 USD = 160 JPY.</div></li>
-    </ul></div>
+    <div class="card" id="stmt-lock">
+      <div class="lock-wrap">
+        <div class="lock-ico">🔒</div>
+        <div class="lock-h">Your running statement</div>
+        <p class="lock-p">Enter the access code shared with you to view your itemised charges and balance.</p>
+        <div class="pw-row">
+          <input class="pw-input" id="stmt-pw" type="password" inputmode="text" autocomplete="off" placeholder="Access code" aria-label="Access code">
+          <button class="btn" id="stmt-unlock">Open</button>
+        </div>
+        <div class="lock-err" id="stmt-err"></div>
+        <div class="lock-hint">Private to the lead guest · figures in USD</div>
+      </div>
+    </div>
+    <div id="stmt-view"></div>
   </div>
   <div id="tab-emergency" class="tab-panel"></div>
 </div>
@@ -1030,7 +1049,7 @@ function renderDiet(){
     return '<div class="jp-card'+(p.severe?' severe':'')+'">'+inner+'</div>';
   }).join('');
 }
-{document.getElementById('diet-modal').classList.add('active');document.body.style.overflow='hidden';};
+window.openDietModal=function(){var m=document.getElementById('diet-modal');if(m){m.classList.add('active');document.body.style.overflow='hidden';}};
 window.closeDietModal=function(){var m=document.getElementById('diet-modal');if(m){m.classList.remove('active');document.body.style.overflow='';}};
 
 /* ═══ RENDER · UTILITIES ═══ */
@@ -1136,7 +1155,79 @@ window.addEventListener('resize',fixHeaderOffset);
 }());
 </script>
 
-<!-- Statement library omitted: no itemised charges at this planning stage -->
+<!-- Statement library: client-side AES-GCM, two-tier access -->
+<script>
+(function(){
+"use strict";
+var BLOBS={guest:"NcWRJJOJIH2suooobGR/W/aX+mT18IUPKIAIZoK3ETLP2IWlLn+3GIWtUp1yfRSErBCvLQ0Pgd+yb7w1JiZBBfAAQru8Y7C+tFtQsAp210CEse3GxWZz0ojcf2LomGhFLeJCV1Xnr1og/d0wkyaPeEbx561oSvgewgdTINAAapz95K4g6U1V/x3Bz4i9FA3N0eQUBrn3IvyxtqL8jL7WL1tQUGktGqRmKktsFXZzaE5PYxtygEzOIRa5T+rSHOhtjf5Mfq4oALJaN3/qEin27dv3JrljiDxZZVgFO7xPY4LY2JX2EsqSG/7iYNZTy+lOEEYOjmpHFx14lytexEyLKf+En0oOeCJH8i/1irzNkqdgz9GZJYS+Fp8TM0Nvp704v1i5hTysaDrhKnJE8WBg46xKYvDu5GKyY4XEp9rwmMh3DEbcN02kr9bpges5Lk24Atj0t/QEP1XO1a35frsZcZ8dqHwdeggU908q/CSktPMnh+Z9jC2xJQosnjr/Iky6aKdGzrHikVyBZbD+mWwtPbMC5NGTYT2vME6oHywT3LBPpDTHKHGlKrXELPBc16fnQikEbtyQkV/qS/CVqCcGLE2keyvxQ2QN45B8a0pkthRiMbglr2Kq08YQQw//z2HLSqpjKgWz6yypFJ48ZhHn/ghQ3NqwiWD3geqPqlZCpvCR0MN2EmIQuWYlODr/ebvJ0IVnvoUM1iO70G8y7ScQOPtmHLNw7YKOvP3RB3BCR0wd/3JIyGEC8rzmGHdCqvJe9kadQbsB2pbshcPKaA==",staff:"Jq7gXInxT0Qhj9ECpJGyQrHEc5+Cv8lZynPu6ozZfKiz4DhjmRTuR2+nJhaoCU+u2mLeywPEx98PCmUc9xRCyiHDV9lo26XXiPxisen352q71ZHA5/4V+8UkgiJcUn1J8Pg/0R+6blgU2b+p4u9ranGu+AB79lQHxPAbuckJoykxVgQ6ArZoBPXYo3A5vvfXLBKUsZdKguGN2Bm8AsGf8LjI/j4bKIwi3Iv+/Z21Dgj5GYT0RCNyj8wGFZD5BYHphJLEDbMrBgP7v4jc5AHh3qyPrbCz9j9sInu2EWaCDPXSGm5T4l0TdlJBmjUpxdUEg5UrZmycrnBqi8xZTiIToTiOxA9EY4+2Yq37UDD7FigiXoJh5PmCi3ReJYjfB1yr9ragMVgp9nPsOEmgtpuaIj8zTZWds9/Scf/D0oQGayjRtltMxUBv6REvUdfLyd+gEo9O5vbHiYVcs/Y22dxilPWJ9HAaqua3BFN2xrQHV3VxGeADFo3cjJY76JKGAN+wjYgr8mX0AwgNycy34CJDeAKpFypvsdSsBQrGdhpjVPhH6Fg2IIn5ROU12gZu5ho1iuflbjP6oTtFyJtGJAgbigN6EsHEySJYL+FYLMhyOKBgldw9KCRr4ec+M2MBoLc6SIv2VwUf0kqiOX7BCeH6bCAZQ3FgIWKSrdlYSMSFrdvTmkd0rCxb+LFEuG29GygLmVpDbY4sfEKP5aJskM9sTHCB1oPgWd065A9Xcudh0q91nUwAFLO8Ja8MuacMq7qlxWJX6v/ivwTFDjn/sRZjLLmzUGUES6l2rrMHEpoTQ77lTWK8SEmcNUjDSUapUnKwqSXc10u3EX0YMLpa81Hr5DexIk/C8MawFNb1rUUpaY8gAPZ0VQzLNY9DRckqWvYmH4TNqF5cq34oqXc0hbAM9yJiY48CvT37e+NYC6mGrZj5/qgq38itn0RfrJvyI0+yxc91GMgvCURlC2lH00NUasGGqzf1GQXhetUlteugiB87oBpZl3NI8hyaJ0Px/xr6jdG2FyU67nuLlTDQcjIAY8xTOHwP9zjUWfU9+r/nz1IvRaAsqYVUKCNhSIaRkKuTIvy+tcIcuDhAAfHnql10J+fUIEnUjCdsXCeVQ6O4U/MJ8Hz6ghELgnE4Ea0l9CXVUK5SS4DscKaKMf+OrPxqH3xe9HvLw4fRFd9K14gIN9CudVeZblKsfa8dOMPc8Ko="};
+var ITER=150000;
+var unlocked=false, idleTimer=null;
+function $(s){return document.querySelector(s);}
+function b2u(b64){var bin=atob(b64);var a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a;}
+function money(n){return "$"+Number(n).toLocaleString("en-US",{maximumFractionDigits:0});}
+function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function deriveKey(pw,salt){
+  return crypto.subtle.importKey("raw",new TextEncoder().encode(pw),{name:"PBKDF2"},false,["deriveKey"])
+   .then(function(base){return crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:ITER,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);});
+}
+function tryDecrypt(blob,pw){
+  var raw=b2u(blob);var salt=raw.slice(0,16),iv=raw.slice(16,28),body=raw.slice(28);
+  return deriveKey(pw,salt).then(function(key){return crypto.subtle.decrypt({name:"AES-GCM",iv:iv},key,body);})
+   .then(function(buf){return JSON.parse(new TextDecoder().decode(buf));});
+}
+function row(label,val,note){
+  var right = (val==null) ? '<span class="stmt-pending">'+esc(note||"—")+'</span>' : money(val);
+  var sub = (val!=null && note) ? '<div class="stmt-note">'+esc(note)+'</div>' : '';
+  return '<div class="stmt-row"><div class="stmt-label">'+esc(label)+sub+'</div><div class="stmt-val">'+right+'</div></div>';
+}
+function render(d){
+  var staff = d.role==="staff";
+  var h='<div class="emergency-banner" style="margin-bottom:14px">'
+    +(staff?'<div style="font-size:10px;letter-spacing:1.5px;opacity:.6;text-transform:uppercase;margin-bottom:4px">Staff · Internal</div>':'')
+    +'<h2>'+esc(d.title)+'</h2><p>'+esc(d.sub)+'</p></div>';
+  h+='<div class="util-card" style="padding:6px 16px">';
+  d.lines.forEach(function(l){h+=row(l.label,l.val,l.note);});
+  h+='<div class="stmt-row stmt-sub"><div class="stmt-label">Payments received</div><div class="stmt-val">'+money(d.paymentsTotal||0)+'</div></div>';
+  if(d.payments&&d.payments.length){d.payments.forEach(function(p){h+=row("· "+(p.label||"Payment")+(p.date?" ("+p.date+")":""),-Math.abs(p.amount));});}
+  h+='<div class="stmt-row stmt-total"><div class="stmt-label">Outstanding balance</div><div class="stmt-val">'+money(d.outstanding)+'</div></div>';
+  h+='</div>';
+  if(staff && d.internal){
+    h+='<div class="section-label">Internal reference</div><div class="util-card" style="padding:6px 16px">';
+    d.internal.forEach(function(l){h+=row(l.label,l.val,l.note);});
+    h+='</div>';
+  }
+  h+='<div class="util-card"><ul class="info-list"><li><span class="info-emoji">💱</span><div class="info-text"><strong>'+esc(d.rate)+'</strong>'+esc(d.footnote)+'</div></li></ul></div>';
+  h+='<div style="text-align:center;padding:6px 0 4px"><button class="btn" id="stmt-relock" style="background:#eceff4;color:#33475c">Lock</button></div>';
+  $("#stmt-view").innerHTML=h;
+  $("#stmt-lock").style.display="none";
+  $("#stmt-view").style.display="block";
+  var rb=document.getElementById("stmt-relock"); if(rb) rb.addEventListener("click",lock);
+  unlocked=true; arm();
+}
+function unlock(){
+  var pw=$("#stmt-pw").value; var err=$("#stmt-err");
+  if(!pw){err.textContent="Enter your access code.";return;}
+  err.textContent="Checking…";
+  tryDecrypt(BLOBS.guest,pw).then(render).catch(function(){
+    return tryDecrypt(BLOBS.staff,pw).then(render).catch(function(){err.textContent="That code was not recognised.";});
+  });
+}
+function lock(){
+  unlocked=false; if(idleTimer){clearTimeout(idleTimer);idleTimer=null;}
+  var v=$("#stmt-view"); if(v){v.innerHTML="";v.style.display="none";}
+  var l=$("#stmt-lock"); if(l) l.style.display="";
+  var pw=$("#stmt-pw"); if(pw) pw.value="";
+  var er=$("#stmt-err"); if(er) er.textContent="";
+}
+function arm(){ if(idleTimer)clearTimeout(idleTimer); idleTimer=setTimeout(lock,180000); }
+function init(){
+  var u=$("#stmt-unlock"); if(u) u.addEventListener("click",unlock);
+  var pw=$("#stmt-pw"); if(pw) pw.addEventListener("keydown",function(e){if(e.key==="Enter")unlock();});
+  ["click","touchstart","keydown","scroll"].forEach(function(ev){document.addEventListener(ev,function(){if(unlocked)arm();},{passive:true});});
+}
+window.HCIStatement={init:init,lock:lock};
+})();
+</script>
 
 </body>
 </html>
