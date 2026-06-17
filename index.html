@@ -573,12 +573,12 @@ var TRIP = {
         { time:'Daytime', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'Toyama Bay', sub:'White shrimp · glass art · the deep bay', loc:'Toyama Bay', addr:'Toyama', q:'Toyama Bay', notes:'One of the richest fishing grounds in Japan — famed for shiroebi (white shrimp). The Toyama Glass Art Museum (a Kengo Kuma building) is an easy add for the afternoon.', alert:null },
         { time:'18:00', type:'restaurant', badge:'Self-booked', badgeType:'self-booked', title:'Ebitei Beikkan · 海老亭別館', sub:'Dinner · 18:00 · Toyama institution', loc:'Ebitei Beikkan, Toyama', addr:'Toyama', q:'Ebitei Toyama', notes:'A long-standing Toyama institution built around the bay\u0027s catch. Penciled in the canvas; to be requested.', alert:null }
       ] },
-    { date:'2026-11-07', dayNum:8, weekday:'Saturday, 7 November', city:'Komatsu', cityClass:'', hotel:'Auberge Eaufeu', hq:'Auberge Eaufeu Komatsu', hotelNote:'Dining with rooms · suggestion', hosted:false,
+    { date:'2026-11-07', dayNum:8, weekday:'Saturday, 7 November', city:'Komatsu', cityClass:'', hotel:'Auberge Eaufeu', hq:'Auberge Eaufeu Komatsu', hotelNote:'Dining with rooms · 2 rooms confirmed', hosted:false,
       notes:'A sake-brewery visit, then dinner and an overnight at Auberge Eaufeu — among the most interesting countryside culinary destinations in the region, and a fitting close to the Hokuriku section before Tokyo.',
       stops:[
         { time:'Morning', type:'transport', badge:'Transfer', badgeType:'requested', title:'Toyama → Komatsu', sub:'Private car / rail', loc:'Toyama', addr:'Toyama', q:'Toyama Station', notes:'Back toward Komatsu, with a sake brewery along the way. Routing confirmed once the flow is agreed.', alert:null },
         { time:'Afternoon', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'Noguchi Naohiko Sake Institute', sub:'農口尚彦研究所 · sake tasting · Komatsu', loc:'Noguchi Naohiko Sake Institute', addr:'Komatsu, Ishikawa', q:'Noguchi Naohiko Sake Institute Komatsu', notes:'A visit to the Noguchi Naohiko Sake Institute — the brewery of the celebrated tōji (master brewer) Naohiko Noguchi, one of the most revered figures in Japanese sake — with a tasting before dinner. Penciled into the canvas; to be confirmed.', alert:null },
-        { time:'Evening', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Auberge Eaufeu · オーベルジュ オーフ', sub:'Dinner & overnight · countryside dining with rooms', loc:'Auberge Eaufeu, Komatsu', addr:'Komatsu, Ishikawa', q:'Auberge Eaufeu Komatsu', notes:'Dinner and an overnight at Auberge Eaufeu — countryside dining with rooms, among the most interesting culinary destinations in the region and a fitting close to Hokuriku. A named suggestion, to be requested.', alert:null }
+        { time:'19:00', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Auberge Eaufeu · オーベルジュ オーフ', sub:'Dinner · 19:00 · countryside dining with rooms', loc:'Auberge Eaufeu, Komatsu', addr:'Komatsu, Ishikawa', q:'Auberge Eaufeu Komatsu', notes:'Dinner at 19:00 and an overnight at Auberge Eaufeu — countryside dining with rooms, among the most interesting culinary destinations in the region and a fitting close to Hokuriku. Confirmed, with two rooms reserved.', alert:'Confirmed · 19:00 · dinner & overnight · 2 rooms' }
       ] },
     { date:'2026-11-08', dayNum:9, weekday:'Sunday, 8 November', city:'Tokyo', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'Train to Tokyo. By the time you arrive you will have travelled regional Japan — which makes Tokyo\u0027s dining read with far more meaning. Seven days in the capital: the finale rather than the whole.',
@@ -626,6 +626,7 @@ var TRIP = {
 /* ═══ WISH LIST ═══ */
 var WL_CONFIRMED = [
   { name:'Sushi Sakai', style:'Sushi · Sat 31 Oct · 19:30 · dinner · Fukuoka', q:'Sushi Sakai Fukuoka' },
+  { name:'Auberge Eaufeu', style:'Dining with rooms · Sat 7 Nov · 19:00 · dinner & 2 rooms · Komatsu', q:'Auberge Eaufeu Komatsu' },
   { name:'Sushi Meino', style:'Edomae sushi · Mon 9 Nov · 12:00 · buyout · 2 seats · Tokyo', q:'Sushi Meino Tokyo' },
   { name:'Tempura Naruse', style:'Tempura · Wed 11 Nov · 12:00 · buyout · 2 seats · Shizuoka', q:'Tempura Naruse Shizuoka' },
   { name:'Yakitori Hikita', style:'Yakitori · Thu 12 Nov · 20:30 · buyout · 2 seats · Tokyo', q:'Yakitori Hikita Tokyo' }
@@ -637,7 +638,6 @@ var WL_REQUESTED = [
 ];
 var WL_SUGGESTIONS = [
   { name:'Ajimori', style:'Kurobuta black-pork shabu-shabu · Tue 3 Nov · lunch · Kagoshima', q:'Ajimori Kagoshima' },
-  { name:'Auberge Eaufeu', style:'Dining with rooms · Sat 7 Nov · dinner & overnight · Komatsu', q:'Auberge Eaufeu Komatsu' },
   { name:'Ichiran · Honsha Sohonten', style:'Walk-in · tonkotsu ramen flagship · Sun 1 Nov · Fukuoka', q:'Ichiran Honsha Sohonten Fukuoka' },
   { name:'Oryori Furukawa (or Imoto)', style:'Kappo · Sun 1 Nov · dinner · Fukuoka', q:'Oryori Furukawa Fukuoka' },
   { name:'Hakata Genki Ippai!!', style:'Walk-in · Hakata ramen · Mon 2 Nov · Fukuoka', q:'Hakata Genki Ippai Fukuoka' },
@@ -1032,7 +1032,7 @@ function renderItinerary(){
     +'<span class="banner-chip">🐎 Sakuraan · Kumamoto</span>'
     +'<span class="banner-chip">🐖 Ajimori · Kagoshima</span>'
     +'<span class="banner-chip">🍦 Mekumi · Kanazawa</span>'
-    +'<span class="banner-chip">🏞 Auberge Eaufeu · Komatsu</span>'
+    +'<span class="banner-chip confirmed">🏞 Auberge Eaufeu · Confirmed</span>'
     +'</div></div>'
     +'<div class="booking-legend">'
     +'<span class="bl-item"><span class="bl-dot confirmed"></span>Confirmed</span>'
@@ -1300,13 +1300,39 @@ function renderUtilities(){
     +'<li><span class="info-emoji">📡</span><div class="info-text"><strong>eSIM Recommended</strong>Activate before landing: Airalo, HolaFly, or Ubigi.</div></li>'
     +'</ul></div>'
     +'<div class="section-label">Dining Etiquette</div>'
-    +'<div class="util-card">'
-    +'<div class="rule-item"><span class="rule-icon">🚫</span><div class="rule-text"><strong>No Fragrance — Critical</strong>Avoid perfume, cologne, and scented products on dining days. Even a trace disrupts the chef and other guests at the counter — the single most important point at high-end Japanese restaurants.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">⏰</span><div class="rule-text"><strong>Punctuality</strong>Arrive on time or early — the meal begins together for everyone. Allow generous transfer time to quiet back-street addresses.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">💍</span><div class="rule-text"><strong>Protect the Counter</strong>Remove rings, bracelets, and watches at sushi counters — many are single pieces of precious Hinoki cypress.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">💰</span><div class="rule-text"><strong>No Tipping</strong>Not customary in Japan. Say <em>Gochisousama deshita</em> after the meal — deeply appreciated.</div></div>'
-    +'<div class="rule-item"><span class="rule-icon">🔒</span><div class="rule-text"><strong>Reservations are Firm</strong>Once confirmed, reservations are commitments — cancellations damage relationships built over many seasons.</div></div>'
-    +'</div>';
+    +'<div class="util-card"><div class="util-card-title">High-End Sushi &amp; Omakase</div>'
+    +'<div style="font-size:13px;line-height:1.6;color:var(--ink-2)">At an omakase counter every guest is served together and the room is built around the chef&rsquo;s craft. A few conventions keep the experience right for you, the chef and fellow diners &mdash; fragrance is the one that matters most.</div></div>'
+    +'<div class="util-card"><div class="util-card-title">👔 Attire</div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>No formal wear needed</strong> &mdash; understated, clean and well-presented is the right register.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>A collared shirt</strong> is a good choice for men at upscale counters.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Comfortable footwear</strong> &mdash; you may cover considerable distances during the day.</div></div>'
+    +'</div>'
+    +'<div class="util-card"><div class="util-card-title">⏰ Punctuality</div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Arrive on time, or a little early.</strong> In omakase the meal begins together &mdash; a late arrival breaks the flow for the chef and the other guests.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Service won&rsquo;t be held.</strong> Each course is served at its ideal moment and can&rsquo;t wait without compromising the meal for everyone.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Plan the journey.</strong> Many counters sit on quiet back streets that are hard to find first time &mdash; allow extra time.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Respect the craft.</strong> Lateness reads as disregard for the preparation and the time reserved.</div></div>'
+    +'</div>'
+    +'<div class="util-card" style="border:1px solid rgba(176,124,34,.45)"><div class="util-card-title">🚫 Perfume &amp; Fragrance · most important</div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>No perfume or cologne.</strong> Even a light scent alters the sensory atmosphere of the room.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Skip scented hair products and lotions</strong> &mdash; easily perceived in an intimate counter setting.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Don&rsquo;t smoke beforehand</strong> &mdash; the residual smell carries to the chef and others.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Use unscented laundry products</strong> &mdash; clothing holds fragrance even when no perfume was applied that day.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Avoid strong gum or mints</strong> &mdash; they dull your own palate and the subtlety of the food.</div></div>'
+    +'<div class="disc-note">A note from our team: a guest who had carefully worn no perfume still carried scent in her clothing from regular use. The chef was visibly uncomfortable and briefly considered asking the table to leave. Even an unintentional oversight is taken seriously at the counter &mdash; this is why unscented laundry matters.</div>'
+    +'</div>'
+    +'<div class="util-card"><div class="util-card-title">🍣 Table Manners</div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Rest the free hand on the counter</strong> (or lightly support a bowl), not in your lap &mdash; graceful, and it protects delicate tableware.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Remove rings, bracelets and watches.</strong> Counters are often a single piece of precious Hinoki cypress &mdash; jewellery can mark the surface.</div></div>'
+    +'</div>'
+    +'<div class="util-card"><div class="util-card-title">💴 Tipping</div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Not expected</strong>, and it can cause mild awkwardness. A service charge (<em>sabisu-ryo</em>) is usually already included.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Don&rsquo;t leave cash on the table</strong> or hand money to staff &mdash; it isn&rsquo;t standard practice in Japan.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>Say <em>Gochisosama deshita</em></strong> &mdash; &ldquo;thank you for the meal.&rdquo; The most valued thanks is verbal.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>A thoughtful gift</strong> &mdash; good sweets from a well-regarded shop &mdash; is more appropriate than cash.</div></div>'
+    +'<div class="rule-item"><span class="rule-icon">•</span><div class="rule-text"><strong>The rare exception (<em>otokishugi</em>):</strong> a discreet cash envelope, typically only for long-standing regulars or business relationships.</div></div>'
+    +'</div>'
+    +'<div class="disc-note" style="text-align:center">Arrive on time, dress with care, mind fragrance and thank the chef warmly &mdash; the same precision and consideration that make dining here so remarkable.<br><span style="color:var(--gold)">Unlocking Japan, one thoughtful moment at a time.</span></div>';
   var jEl=document.getElementById('fx-jpy'),uEl=document.getElementById('fx-eur');
   var grp=new Intl.NumberFormat('de-DE',{maximumFractionDigits:0});
   function groupInt(d){return d===''?'':grp.format(parseInt(d,10));}
@@ -1411,8 +1437,8 @@ window.addEventListener('resize',fixHeaderOffset);
 (function(){
 "use strict";
 
-const ENC_GUEST = "wtSL9xPYnZZV2peHjp425GkGcrF3n6f0Dyc9t52Ce1nX6LgBK8xdWXVeYT4t1b12IOkZYR9hdcAb35xtl/roA9VUjFmRdhj0titE2C1O2j7Vtjiz7oCxN9QeRP4jL2VAtKydhr8nSz/RM0+0mDzey3ANI0URPglF+rU0Ocb/2XIa2SpI7jOD5L0C+iW0HKNOdneABYh6xes8oqVWeAW0B8V5s+Uf/9j5SGEj9ShnX5XdB4PTtM8i/ORjtWaqslQCqZV9dY8aDfSlYJF/ljO+NZPYjw7dKdJv3BH/jZc+VTFBxMmJxZToHtahaHEslU/hV6z9byFcJs82ZrrsKV8oqJ9NL7ztKakI9NpyLkkyLsCtV264ugYQCpP04/cHNGsIEzJWbkQ74fqncCI0r9S5qkvlb4tCn9Lt+/YOpZTbo0U+XHHx4OaW6szaz5Y8cZqytxZZ3kW/vGv63IxX+HdqneLSh8tHNhjIPHFdmznOHSheTlCZRUIISUbDym4rHwwiVjs4CypokXWZAEob5HFb8xcdksQWBoA1huB3KcRfYq337EHTpHqTr+Prb3G1GTK+P8q2MfTjr6HSsFRgQ0lYi95DoXqk4LURwNN4M8TWorfLTQqoROW4Gy1tTIp3DCrckYlEiPAM5aFWYmg6eswonY9dGTfZ7xByjpXLV1uPH2ZYwi8JVnZBEuCwGOHQlK+9M5M20M8gDxIxwacs8CQhCCR97ESjHvJablEoyF/AhTSirz+QC+mzgV6Rf4RiVyNg86ZGi6gaengt1/TA68EKlRAovCBS7AjaM9kzukPy/f9McXZzPFVveFy0hiiFGrt4nA2PUv+pvXO5vjtZyESnbNwW+mAEXKEFfa+Jn6Ev4Z3be8zw5hjIifqgugowo8tvVadJWDtcH8nyOzB/DuOr1F9upgIqYAmLPSPJ00QeeFzF9e/TBAnLqI9Q5CO4fpeQnxwfW+qOUlF1vJQDi2rAPFMtUcJZq8qNdtk0wlvvebG8acsp/zUiuvDBoFD1T1LxMbNgMytLb1KJdPXIDSv8aYxk0Y0twHAWxgSeImkCjpdABqs=";
-const ENC_INTERNAL = "4MACLjR6/tHUeiR81wowsN/dq0kD1hLY6P4PdppdaqLGvEV3wXF7N46vnqsMnNTm3pAHy3NnNIa1+LrtcXK5a3nTP2mODePEtHhEWe8XKxt8E9n/hlPUQhapx9d7bYaTppPNj3GqKCt0QeANsqd6qaQldrlQ+tfJ88Q0tRh5mKJX7xQ0e1Im4IAiYoe+GbGU+6+WsvcGUq0zYUM76c0VXiMqB01uFxyu4ib86Bwn8C13a+N5//zQBNofnH7mmNNh8/+QnsTuXYxcA/rwkJBkdjgiq+MRibF5msV3k9+k+md2rp6kWsNjhVxeRXby2Noue5vMSoBsHZfFXOognSO2qUPi9HfLonJJ7kt+6Rq4MEgafjLe8WBoJezBsGgz32SpE+CU40iVx32H9XKxSuz7tdQnC92grbDHKaCObYSCKDy3ogFmhglUg0cD/kjydK+FO3lXsR3FWin/nfOhVIMme/knj5LG+spPqILyQgm5mjUfE+bFLJeve6jK6G6uOct7RtT5kgKkmPvcgW4LsWjCXatzyPCPVeamCtKzpvaHBEDHoBjqPOs+jecDDyRUvAhPK7mMAMW1UaNiHRkuDYKn1K6W+7OkPD9lROnY8J4FaEGK4zQ7i3wGuN5igoz4jRY4WssQNFXTAW0MXBSf4BiEl8R+cA4Y62axZ3oI42EOP2CNobVC7TWkl9ra0fpM8OC6vAboZcUljfCHyxBflnIWpOrHBppByld2mpDaG2yyBRaBlF3RuoIyWeffL+/PLGXyumqOONwa6/0GB+ErwLBjN6GBe6Ld5WQGHcBmon+nJ6qBhvhEopTHg/1hm4zpI3lgplzEzzx1d8Z1srBgS85+yWcq/rZM1ZHWEhhWG9V9DwLAoSlMq5AUW4ODJtpJFSB2Ocv8mgRtyXqUzNH97bw4SOK7NnelJeNIcOpJI2nkygPkfNrf7Fscfeyjv27Z4aZ0h+FdNHSNXv3HsXe8sgrUea5kZFsABLl6QkORSJAbjIuaisK5KRPQtxfXU9jArfAsEqKgwpTjtHK2N39o+Uk1/or8RdYsi7ZuPJ+In9lcpN7a/TEu7snlcfe6bbBU5Ql7GDVRFbFTNudc71VZE0AhDWMTvHurFA8=";
+const ENC_GUEST = "qF9Y0wM/yLpWSFv3BREyZCE1jxVzxPueTobwWRvXdHkYe5LrNBGBuIgLvhCyrmMbwmqRh4hZCfCla0O6ljU173+8rK8epp83TLM50ucmwukmtvhLYw9MeyaGh5UKGUtbhRpoxgGC3Ozr51xtbCYtODxmQV5VHe3OUSEo4+5v2Z6On4Ng5h4dmJ60/X9zatXSYPXnk1lmeS/d+W9jr5jGYXLYqLQZAWStRn2nC4Rfq1a1C1Hx1Gsyy+PhBSPIPXAnalql36EWcyDKHK4cBmQdoMkG6rA/laZSNsZBbo/zE2q4j0SLDnJslBAKmwKlO8nrlntQhj/EP+AhcQ4X61KyE6gJkZGHpF0+lI3FMiZ5ML+A4pAkiLDqNraNNiZfsGFOEX3yRLtzvz8HnCCnOHuNzEWLyt7bS7vv4nzdlKYqnvaondfaOq34Qc/Lk+TPSgSzddMhYqUIIlX3eqoWfhlRX4UbCVk+EkUqWO6v1DNpbBteRtPMK6VvxNNGwA++3W8F4BKh4tKRV8jCJ/P30vaJyMd/aCV67YnQgh7vj2kkh1VlqlMeQDo5ELk5AF+ccs1oixJAZ3r35u38Dp2c4hg0j/no8u9bevjYg4ukQ8/oBAYKeBt/KZtYEPC5KefycVSoNjbHkVenMhrySOQGgC+j3QIVesCfxVSdPCPhvh9BNQ9HM0YxcCk1mIIgqx5/tSRNz+iVS34bGEOunfj4e1aWY2mWkIYOKJuoQ5GTaGyEq88QPGoGQdxZaZWGeGxTlrqS9YDc3VmP3MIpjPdRpKGhTczcW91fcfd9PunRTqqhvveo16nCk/cPomIoYXoCKtLSAzz47GF+qtDwB+tmYdzqTArbMksyHghpq6qvanfjhlXXfBKugY3onLYjzBBSKwn5RjpzHGSnwgMC1XqvIXFRbGicFFTuecoNREesvIyU6PPExzF32sqbp02DhK7Iper1uDboBU+Nxa5t9eddCPyKlyilB1+TnJ6XYZ2bJfU17yvepVGOAeAm2VW0bPPtC89DzXKqI88ZKRgsQNylfBzVEDLU89eCcvzjaQ2GLFZ5++zBEIrRzQG0/VyU0NEN1/0DiSf2AIrLH6gN2mbjBQxzFmgynihfdvb6az+ugY9okgQ1+JpMxYwAKJUK9pckIfe7smz6pnlPAkb5iW9OBpuwL5lVlGR2ZO219xZokCE=";
+const ENC_INTERNAL = "igi+YIYQtEqD/ATr2JLU9PKi5JT1dm6ImRjwNa2VoMWdoXSP+XM6H8N0SNXFa01ky5U0RZ/Uceehi67BREnvJWC4v4jfs0Gh12vlGMqo0o7C2vqE9fkpMDV39tw79e1GLR5OJwDUPJB2fVsGt+nyy9z1rtYjH7CA7FBeqXOp0tPEVOiaAH4AJNQfT8cUBu8G3v8gNoWXFLnKjxVHG6fhIUBsu5j1cciorY/E/cmVAclj+G5AwJ9xLv+jjY4OB0zIIjsX5faeBv8biDlH5VQSLwIyTsAdE2D0UQ92MpMHq/AvNpEM7C7AvEG9qtzX/rQzoeOd+JyuwQDDU1Mf/pnq6faTZ2f5dhwGDVmOF+SfWcDSPwMesw4Kwe2dTyHts+g0zXak/og3MjppFhBhyQ1a8cSkDbyNVdDGgytMSJOvlT1/+AbEqwl2ud4CWAxn6QPEILf+Ri+vbcEiz/E1fAwwlQffO9U/DYwBOcgxAvQ9WyKUGaolAjRoEYTJajZ3OjNCgfOUlQe5NZZL4xHjdCtktX7Id9vFk54Srrm1chdV3ZaRvWWA7sg8IYvKWwfX0H98Dib+/crWEJZQ4vPGbo7rTvEMxyZEFPQ8bLFQa7MXoeJMaovZgmyKm6t5dCoXbDESqSPOHhlO9NwElFGFdQ0Qf/ZykOO5KMXWAR/FFHJLrokRAhz2C3+JOKGO3PZBgwiDXOO30PYK4r8O4MiBVjqJuxjm57bhuBz/kw7TjCagTGk2UJtnCdfkJ/qF+Ai2fdeFD6hojGXfmM686lLkOHyx9uBM/qigVOHNAALbvmKTuyxfSfPGWIJtU03CsmTFZlxWp7eK6OKkmwa8ImIGjWDKDd8ElvHuAcjT9WQch11+LgqOLeUUnCrdkMoH7gCFXKdz9mXIwoUty4QgTqBke3ez0YpgwB1lOpZiHvwIoPSGkyn4FFmOy2OjNUizvXXluMt8a3R1ma/3KsUltT/yqEn9IJ45LSmFx0d1CbpgQFTcunBhp4jLRZnPogYyYDLNG680aAGj5XWkK8jF4VS7XanlyYe7frB9ZzF3y6IzVO1Z6hDQL25X9EkHexcBUcDGQWpVFVMGP4vAUtIDwKX/Wj6tc4GsNHbStBOqRyggK2z3suh/NN+8Qq+v6H+DAc6EhS1qHC89+czIjAkDCHF0ZJfL6FEYH4CL3JzMmosWfk9HATU6Q0+aV7kByqC0is+I5Qi7doB4ZOh3daY2Cz6Ez6cruIC7qT1G4jVNZOc=";
 
 const TIMEOUT_SEC = 120;
 
