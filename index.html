@@ -531,7 +531,7 @@ var TRIP = {
       notes:'Arrive Fukuoka 14:40 from Seoul and ease into Japan through one of its great food cities — relaxed and unhurried, exceptional seafood and sushi cut to the local idiom. A deliberately gentle opening before the week deepens.',
       stops:[
         { time:'14:40', type:'flight', badge:'Arrival', badgeType:'self-booked', title:'Arrive Fukuoka', sub:'From Seoul · private transfer · Kyushu', loc:'Fukuoka Airport', addr:'Fukuoka Airport, Hakata Ward, Fukuoka', q:'Fukuoka Airport', notes:'You land at Fukuoka at 14:40 from Seoul. A private transfer takes you into the city — Fukuoka Airport sits unusually close to the centre, only a few minutes from Hakata. Draw a little yen at the airport; some regional counters prefer cash.', alert:null },
-        { time:'Evening', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Sushi Sakai Group', sub:'Dinner · sushi · Fukuoka', loc:'Fukuoka', addr:'Fukuoka', q:'Sushi Sakai Fukuoka', notes:'A first Fukuoka dinner — sushi cut to the local idiom. Penciled into the canvas; to be requested once the flow is agreed.', alert:null }
+        { time:'19:30', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Sushi Sakai', sub:'Dinner · sushi · 19:30 · Fukuoka', loc:'Sushi Sakai, Fukuoka', addr:'Fukuoka', q:'Sushi Sakai Fukuoka', notes:'The first Fukuoka dinner, now confirmed — the counter at 19:30 for the two of you, a celebrated Fukuoka sushi room to open the trip.', alert:'Confirmed · 19:30 · table for 2' }
       ] },
     { date:'2026-11-01', dayNum:2, weekday:'Sunday, 1 November', city:'Fukuoka', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'A full day in Fukuoka — the city\u0027s own specialties, ramen at its source, and a refined kappo dinner.',
@@ -633,7 +633,7 @@ var WL_SUGGESTIONS = [
   { name:'Ajimori', style:'Kurobuta black-pork shabu-shabu · Tue 3 Nov · lunch · Kagoshima', q:'Ajimori Kagoshima' },
   { name:'Tempura Matoba', style:'Tempura · Thu 5 Nov · dinner · Kanazawa', q:'Tempura Matoba Kanazawa' },
   { name:'Auberge Eaufeu', style:'Dining with rooms · Sat 7 Nov · dinner & overnight · Komatsu', q:'Auberge Eaufeu Komatsu' },
-  { name:'Sushi Sakai Group', style:'Sushi · Sat 31 Oct · dinner · Fukuoka', q:'Sushi Sakai Fukuoka' },
+  { name:'Sushi Sakai', style:'Sushi · Sat 31 Oct · 19:30 · dinner · Fukuoka', q:'Sushi Sakai Fukuoka' },
   { name:'Ichiran · Honsha Sohonten', style:'Tonkotsu ramen flagship · Sun 1 Nov · lunch · Fukuoka', q:'Ichiran Honsha Sohonten Fukuoka' },
   { name:'Oryori Furukawa (or Imoto)', style:'Kappo · Sun 1 Nov · dinner · Fukuoka', q:'Oryori Furukawa Fukuoka' },
   { name:'Hakata Genki Ippai!!', style:'Hakata ramen · Mon 2 Nov · lunch · Fukuoka', q:'Hakata Genki Ippai Fukuoka' },
@@ -1022,6 +1022,7 @@ function renderItinerary(){
     +'<h2>Japan</h2>'
     +'<div class="banner-dates">31 October – 14 November 2026 · 2 Guests · 14 Nights · Kyushu · Hokuriku · Tokyo</div>'
     +'<div class="banner-chips">'
+    +'<span class="banner-chip confirmed">🍣 Sushi Sakai · Confirmed</span>'
     +'<span class="banner-chip confirmed">🍣 Sushi Meino · Confirmed</span>'
     +'<span class="banner-chip confirmed">🍤 Tempura Naruse · Confirmed</span>'
     +'<span class="banner-chip">🐎 Sakuraan · Kumamoto</span>'
@@ -1406,8 +1407,8 @@ window.addEventListener('resize',fixHeaderOffset);
 (function(){
 "use strict";
 
-const ENC_GUEST = "9x2dhke/P8QRn8LvgE/Z+gxcGMw+xRoDHABLC/p2LbK9fctxVAwftUZuFoHjFJD62a++m+zgcb3yU9Zss87fGLPyZDUVgIVThyOwHi49TtBgg1GNGbYUyc4sHI7xGSexIchjGH/cX+TqgDURbcOnnJEpm2CeIFxVeOyoKQe2v26O1ttR6t9ReemTkgHJBvd2zflglyYp4mj0sPaG2NtPKlF/NEEsmRNkiRCM15N6NNrLyf56jEoDXvFHP9B15SE2uQsJdztcZnmyUK8Nf6ND+sbsvpTxioYfqz74yIMwp7Wh7cFeQr5SDlYzJ1GaAOvn4ukWc9eSmcgCVB7u6XIIbcGm1lmlel3csdQgL7czoK52c6/UJRY3ku3ebh74xiooBL69f5bW3ExxBsOz9cLOTOF+UqaJe6uIBbWLniQo04Ckd+0THiPLxdQwrcuYvLsdLsjITHoiB7lUtS3Lkx7gEJo9IaGmD0+aQ1aocrdnREP//dDA+OiKI33eKiLJV12wstZyzQF+hj+3LrfkIWMxbb6y2zPzM7NM5Xvo32/d0wzhHTRdhJ/uGxklXOBG2IRY8Q5Ntzfc+oLVln36jerplX6ubMDl//TZ8AAzPw53QbhBpB7ll3oxlymSkbv6IoWwCjhUXITyIF0ZmWwF+pAybEJ1lUpjK48CiWaKpcJlYV0VAE3zdWRaL/IepwBUjZMreHv5ozZ7u/WlxtSwCgVBLGa8VNsXwzqM59W2uy3JTg/z47O8y1C4pAhLeqNyWb1ar3Pg6C7gYRW9rqLO4f+jXaRqKmtLYW9RaV9nWqCevW/0d8AotrpGaDrIN2ITJr7Zm0QG2EIeBDJw84c0AkCE6i3sRK3WrWAWn30R3M2xVzdooc8=";
-const ENC_INTERNAL = "B4T5PlqVmZ/AJ4wPdy39JzYeBQLhKJIagy+H1UcV+grdU1uD6stZXKmOx7sEh10IQBxE1UFpDzdfypf53Ro56ZraGbsj/9arZlNSQEO7BlcuWUaIVjIlT6mkxxHsfa4/QjUzS2XA2h1vY/SvDQUgbwV+eg908UfUUyo3CJgyedxIhbqGarzfOpntBJJRadkRtHwZh6O6GS/bZkDIxFPKei11eCpQdV4rVH4bH8//nJrpA2/qUsrALxBm1QE0BsKSv8DDU5MzJwFP0Ix/SU2E8MeYTzc0LrlRo26r1lGhyreTpQo+nxhR9bL0uEY8B7GhnM6Pb6lKonLt6+So/Vz7iNPty2iUeSHJ534nQhws8FX3LAc4otM/pzO7Je12HI3Lf9fB0njmcHmODLqv9WBorjJhIpp6wC8/6Xf2kUl+uDZWV+K2TWCm8CClpCxSEZmyUbr47dZfF2RiF/uz81Yb7EPbg5fM6Dh63BLBhjz6/lk/xdagFOAd+14ysZgLVQA2uW32IHb6+vnOrbE8t1D9xoBJkt3alnmnyDnIbysiNOyl4IuYF9zOKYS+knYx1JqxaYDwEwblyx8gPy14VFewZDUB7X6vIDrMX8y3ESJ3zMLl4KLHdt/meCCMePP727G1gPVNLeerpF5wAK0nyGZc1KwDVFatR9FanY5nzCxWwS6wPZm0eLkLnb+nhVObS+AePP/GYEdHb4223U0jE3IJRwjkCv1er/ijxFl+p9m4xQ1o0ormlY2acmbc0Lp/Y1xjzesNBZfEGovZvHEGsxpTv4TSa23nPzNIe9nfTSqbPDygwpaEoN1tBNt7IbXG/szRhCu6KiLPFp+0Yl91e/nisAVV1ohl7TZSbnEad0KbPYFEpZcceE9VamX5R3sMkK+t4bdyWlk=";
+const ENC_GUEST = "HRThIvy0HRRgJEFG7R3LzhCJA3WFyiaNrnllZVVFMcPQws0YWS7othYD9rratH80uUE8vVlLWda+6RabkOZkedm87A6JtRhlfwmQ1dNYgN6+pOGBzQ2PuoRyujeBp8j9hc3En7nARzIiJutwCLVkKDQxN0qpYVOXk3ELENH7T5V15p8SRYRynHROMtGl6gbk4ZujE/7LBy8zHflaGd/bDsHMGTAMVmQ5JV9FmaNDeM/7m+fNXDcg0eKJRnv4k+MAsXBFw/dOoN9njLlile0ZF5G9W+pOWoffYK6sP/FcNb2Ndb5qkssrvYDncaZd6TrDjRFUwa6RPboeQjM/JEj49y936xi3fD23SVL8xDFPpLMYfsgzhKQ25CXNPNbYVake4MmtBg68Vg6N75YMiwvVuwqKJ5wBC7mfoRORmGQLREsxUK+cYxfextY/5lIUnCTA0KXimk/9n9Sa/7H0LP/Zz8vF/Fv6sy8f00NyG578JSMxeZRM75oS4pRX7ZG03/CKolKfJeaxgxL9Ji6LsbmEVxvIZaCYVAj/yHsJPwAgypF+sZA3nyl7OKmxLfcJNBC7GjeCQIflM2SUguXVUANeohKH5J93CDgvOTFT+i+GjtKMy/05OGRlcVDEeWFWG+dDLakITz0jHhnfH5bP7gRiwsetsyt50V8Vik8GcQdKMec7QduaIu1kZ/BbzKrUySUMjJq5ksXNPgrri6S7jbzW5+edgFC/YUMbMvYb/htT83JEdfLqh6IA/UX7rpok8lXBVgOKL4ZkmFPYmBx9SSlSIdHCLdHk0d07TumlT6Tchl8R6sfq0OCzSyKk8CRGR6QUDbx8ASVX6SqeTiyz+TgfhqJl/o0Qv6gxvQ0mIiT7m5Nj9RwS60ZVutVuRGvrZVEI8rsYTxyQbPB+8kjkTVgmMOmWiLNB/ytDgtoV/r9x/Q7n4j2PYCEHz7r1kqk=";
+const ENC_INTERNAL = "zMqRUQLlZXEH5yxSnajza0SZk13NjkZ/1ML6RFJbU7uWaIzImDOAl3FXFiecyXCdwvGvwtRhxE8YtKho1Z2C8rSp7ZKjLewUfwd4T8IES74+93T0Qk/7xQakmzzftHLxKjC3VTIgulWA89dkxbZGh6mUQX9D/5lJLPsgt49a8xtaSrUs3MUKM4RVX8h1KKN46Fs9+lIoNw+k8WePyDjTSJFJDEWiQEa04mnbWrz/tVDZL2uJVVDkRejl5+gETO+IORWX02/LwG+tkx2CkUSRnN/mHV/wddHZvK5gmwb7gelQGaOD1dqrUwzkXKFMolnvm+HKXURyYvcdFF8NeinJZVfHC5h8GdcsrBclFIWEUM9f1wBkpc1G6HThr5SXUwyt/w+bNPkFlmY0AXt/zEx1damhKu6JhsiF32bV8LiHjl705FvrwMJDiCcXY32JDSwLToZhty72SvNEdFyTU6aYJ6WAwiBu4rLaGC4dsu5Rg5esN7syYOGhyMWWRI+A/V3rvibtdJIVYyaqFwCCvt5+h+lwBzj0c3hRNEFw/h6y8FB3Bs0SWk7YKkQGCBUOdg93CdrLrNr7pVLWBvdz/rn0wSqPqN+eI60uxP391M2lQNP8NtFSnW0JN/iwaaFPuN4LIBjggL8hNgpysXtXH6C6Plb1SgYQxz/woaGgNCBuTgD5URraCTWsa513XfBLYrzPKdburWCSqe8yZ30dZU6s0FGc4XWFQik7BDuUAsBT02bR7fwfuzHkL/6InxmUdmwFCWQ7gFpDx8KM9DxiFvSdxXgG54f1S0OYHuv/GbZYqQGRFzYTWs6QsKA+yTkOJOSLJk1HTiI1teOb2Nqa8QD3bBbHKpFzWRN/+YWZzFmNA4fdoI3JnXiKKzBIUSHQsFhQu2zjJpTgA0SFe0LWYdWXcwuLptBcsflaJVH2OaDVzfoyErexl99/AFWGomxaN3lxzZWf+z33Bre5z0xssss2C9El54zlZbw=";
 
 const TIMEOUT_SEC = 120;
 
