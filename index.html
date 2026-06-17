@@ -63,7 +63,7 @@
     .trip-banner .banner-dates{font-size:13px;opacity:.72;position:relative}
     .banner-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;position:relative}
     .banner-chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:4px 10px;font-size:11px}
-    .banner-chip.confirmed{background:rgba(200,230,201,.25);border-color:rgba(200,230,201,.5)}
+    .banner-chip.confirmed{background:rgba(217,234,211,.25);border-color:rgba(217,234,211,.5)}
 
     .section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--ink-4);padding:8px 2px 6px}
 
@@ -71,11 +71,11 @@
     .booking-legend{display:flex;flex-wrap:wrap;gap:8px 14px;padding:10px 14px;background:var(--white);border-radius:var(--radius-md);margin-bottom:10px;border:1px solid var(--border-lt)}
     .bl-item{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--ink-3);font-weight:500}
     .bl-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-    .bl-dot.confirmed{background:#C8E6C9;border:1px solid rgba(27,94,32,.3)}
-    .bl-dot.requested{background:#80DEEA;border:1px solid rgba(0,77,86,.3)}
-    .bl-dot.self-booked{background:#FADADD;border:1px solid rgba(123,26,26,.3)}
-    .bl-dot.suggestion{background:#BBDEFB;border:1px solid rgba(13,60,110,.3)}
-    .bl-dot.walk-in{background:#FFF9E6;border:1px solid rgba(107,80,0,.3)}
+    .bl-dot.confirmed{background:#D9EAD3;border:1px solid rgba(27,94,32,.3)}
+    .bl-dot.requested{background:#00FFFF;border:1px solid rgba(0,77,86,.3)}
+    .bl-dot.self-booked{background:#F4CCCC;border:1px solid rgba(123,26,26,.3)}
+    .bl-dot.suggestion{background:#9FC5E8;border:1px solid rgba(13,60,110,.3)}
+    .bl-dot.walk-in{background:#FFF2CC;border:1px solid rgba(107,80,0,.3)}
 
     /* DAY CARDS */
     .day-card{background:var(--white);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--border-lt);animation:cardIn .28s ease both}
@@ -135,11 +135,11 @@
 
     /* BOOKING STATUS BADGES — colours from xlsx legend */
     .stop-badge{font-size:9.5px;font-weight:600;padding:3px 9px;border-radius:5px;flex-shrink:0;white-space:nowrap;letter-spacing:.1px}
-    .stop-badge.confirmed  {background:#C8E6C9;color:#1B5E20;border:1px solid rgba(27,94,32,.18)}
-    .stop-badge.requested  {background:#80DEEA;color:#004D56;border:1px solid rgba(0,77,86,.18)}
-    .stop-badge.self-booked{background:#FADADD;color:#7B1A1A;border:1px solid rgba(123,26,26,.18)}
-    .stop-badge.suggestion {background:#BBDEFB;color:#0D3C6E;border:1px solid rgba(13,60,110,.18)}
-    .stop-badge.walk-in    {background:#FFF9E6;color:#6B5000;border:1px solid rgba(107,80,0,.18)}
+    .stop-badge.confirmed  {background:#D9EAD3;color:#1B5E20;border:1px solid rgba(27,94,32,.18)}
+    .stop-badge.requested  {background:#00FFFF;color:#004D56;border:1px solid rgba(0,77,86,.18)}
+    .stop-badge.self-booked{background:#F4CCCC;color:#7B1A1A;border:1px solid rgba(123,26,26,.18)}
+    .stop-badge.suggestion {background:#9FC5E8;color:#0D3C6E;border:1px solid rgba(13,60,110,.18)}
+    .stop-badge.walk-in    {background:#FFF2CC;color:#6B5000;border:1px solid rgba(107,80,0,.18)}
     .stop-badge.pending    {background:#ECEFF1;color:#546E7A;border:1px solid rgba(84,110,122,.2)}
     .stop-badge.logistics  {background:#FFE0B2;color:#BF360C;border:1px solid rgba(191,54,12,.18)}
 
@@ -536,15 +536,15 @@ var TRIP = {
     { date:'2026-11-01', dayNum:2, weekday:'Sunday, 1 November', city:'Fukuoka', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'A full day in Fukuoka — the city\u0027s own specialties, ramen at its source, and a refined kappo dinner.',
       stops:[
-        { time:'~12:00', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Ichiran · 一蘭 本社総本店', sub:'Lunch · tonkotsu ramen · the flagship', loc:'Ichiran Honsha Sohonten', addr:'Nakasu, Hakata Ward, Fukuoka', q:'Ichiran Honsha Sohonten Fukuoka', notes:'The head-office flagship of the famous tonkotsu chain, in Nakasu — ramen at its source, in the private focus-booth style Ichiran is known for. A casual, characterful Fukuoka lunch.', alert:null },
+        { time:'~12:00', type:'restaurant', badge:'Walk-in', badgeType:'walk-in', title:'Ichiran · 一蘭 本社総本店', sub:'Lunch · tonkotsu ramen · the flagship', loc:'Ichiran Honsha Sohonten', addr:'Nakasu, Hakata Ward, Fukuoka', q:'Ichiran Honsha Sohonten Fukuoka', notes:'The head-office flagship of the famous tonkotsu chain, in Nakasu — ramen at its source, in the private focus-booth style Ichiran is known for. A casual, characterful Fukuoka lunch.', alert:null },
         { time:'Evening', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Oryori Furukawa · 御料理 古川 (or Imoto)', sub:'Dinner · kappo · Fukuoka', loc:'Fukuoka', addr:'Fukuoka', q:'Oryori Furukawa Fukuoka', notes:'A refined kappo dinner to close the Fukuoka leg — Furukawa, or Imoto as the alternative. Penciled in the canvas; to be requested.', alert:null }
       ] },
     { date:'2026-11-02', dayNum:3, weekday:'Monday, 2 November', city:'Kumamoto', cityClass:'kyoto', hotel:null, hq:null, hosted:false,
       notes:'South from Fukuoka to Kumamoto, for one of the most distinctive regional experiences in the country — refined horse cuisine, elevated into a kaiseki-style progression.',
       stops:[
-        { time:'~11:30', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Hakata Genki Ippai!! · 博多元気一杯', sub:'Lunch · Hakata ramen · a last Fukuoka bite', loc:'Hakata, Fukuoka', addr:'Hakata Ward, Fukuoka', q:'Hakata Genki Ippai Fukuoka', notes:'A celebrated, cult Hakata ramen counter — a final Fukuoka bowl before heading south. Penciled in the canvas; to be requested.', alert:null },
+        { time:'~11:30', type:'restaurant', badge:'Walk-in', badgeType:'walk-in', title:'Hakata Genki Ippai!! · 博多元気一杯', sub:'Lunch · Hakata ramen · a last Fukuoka bite', loc:'Hakata, Fukuoka', addr:'Hakata Ward, Fukuoka', q:'Hakata Genki Ippai Fukuoka', notes:'A celebrated, cult Hakata ramen counter — a final Fukuoka bowl before heading south. Penciled in the canvas; to be requested.', alert:null },
         { time:'~13:30', type:'transport', badge:'Transfer', badgeType:'requested', title:'Fukuoka → Kumamoto', sub:'Shinkansen · ~40 min', loc:'Hakata Station', addr:'Hakata Station, Hakata Ward, Fukuoka', q:'Hakata Station Fukuoka', notes:'A short Shinkansen run south to Kumamoto — about 40 minutes. Private drivers and rail transfers run throughout the trip; tickets issued once the structure is agreed.', alert:null },
-        { time:'Evening', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Sakuraan · refined horse cuisine', sub:'Dinner · sakura niku kaiseki · Kumamoto', loc:'Sakuraan, Kumamoto', addr:'Kumamoto', q:'Sakuraan Kumamoto horse cuisine', notes:'Kumamoto\u0027s centuries-old tradition of horse cuisine (sakura niku), elevated into a kaiseki-style progression. Not novelty — a serious, considered exploration of a culinary culture particular to this place. One of the trip\u0027s quiet highlights. A named suggestion, to be requested once flow is agreed.', alert:null }
+        { time:'Evening', type:'restaurant', badge:'Requested', badgeType:'requested', title:'Sakuraan · refined horse cuisine', sub:'Dinner · sakura niku kaiseki · Kumamoto', loc:'Sakuraan, Kumamoto', addr:'Kumamoto', q:'Sakuraan Kumamoto horse cuisine', notes:'Kumamoto\u0027s centuries-old tradition of horse cuisine (sakura niku), elevated into a kaiseki-style progression. Not novelty — a serious, considered exploration of a culinary culture particular to this place. One of the trip\u0027s quiet highlights. A named suggestion, to be requested once flow is agreed.', alert:null }
       ] },
     { date:'2026-11-03', dayNum:4, weekday:'Tuesday, 3 November', city:'Kagoshima', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'A short morning Shinkansen from Kumamoto brings you into Kagoshima — black pork and shochu country, different again from everything before. The single night is deliberate: both anchors sit comfortably in one day.',
@@ -562,16 +562,16 @@ var TRIP = {
     { date:'2026-11-05', dayNum:6, weekday:'Thursday, 5 November', city:'Kanazawa', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'A full Kanazawa day — many consider it the finest small food city in Japan: superb seafood, a deep sake culture, living craft traditions, and a far more traditional atmosphere than Tokyo.',
       stops:[
-        { time:'~12:00', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Respiración · レスピラシオン', sub:'Lunch · Noto produce · Kanazawa', loc:'Respiración, Kanazawa', addr:'Kanazawa, Ishikawa', q:'Respiracion Kanazawa', notes:'A celebrated Kanazawa restaurant working Spanish technique into the produce of Noto and the Sea of Japan. Penciled in the canvas; to be requested.', alert:null },
+        { time:'~12:00', type:'restaurant', badge:'Requested', badgeType:'requested', title:'Respiración · レスピラシオン', sub:'Lunch · Noto produce · Kanazawa', loc:'Respiración, Kanazawa', addr:'Kanazawa, Ishikawa', q:'Respiracion Kanazawa', notes:'A celebrated Kanazawa restaurant working Spanish technique into the produce of Noto and the Sea of Japan. Penciled in the canvas; to be requested.', alert:null },
         { time:'Afternoon', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'Kanazawa at leisure', sub:'Kenroku-en · Higashi Chaya · Omicho · crafts', loc:'Kenroku-en Garden', addr:'Kenrokumachi, Kanazawa, Ishikawa', q:'Kenrokuen Garden Kanazawa', notes:'One of the three great gardens of Japan, the geisha lanes of Higashi Chaya, Omicho Market\u0027s seafood stalls, and the gold-leaf and lacquer crafts the city is known for — at your own pace.', alert:null },
-        { time:'Evening', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Tempura Matoba', sub:'Dinner · tempura · Kanazawa', loc:'Tempura Matoba, Kanazawa', addr:'Kanazawa, Ishikawa', q:'Tempura Matoba Kanazawa', notes:'A Kanazawa tempura dinner — penciled into the canvas, to be requested once the flow is agreed.', alert:null }
+        { time:'Evening', type:'restaurant', badge:'Requested', badgeType:'requested', title:'Tempura Matoba', sub:'Dinner · tempura · Kanazawa', loc:'Tempura Matoba, Kanazawa', addr:'Kanazawa, Ishikawa', q:'Tempura Matoba Kanazawa', notes:'A Kanazawa tempura dinner — penciled into the canvas, to be requested once the flow is agreed.', alert:null }
       ] },
     { date:'2026-11-06', dayNum:7, weekday:'Friday, 6 November', city:'Toyama', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'A day given to Toyama Bay, one of the richest fishing grounds in the country. Two ways to take it: a day trip from Kanazawa keeping the same room, or an overnight closer to the bay. The day itself is the same either way.',
       stops:[
         { time:'Morning', type:'transport', badge:'Transfer', badgeType:'requested', title:'Kanazawa → Toyama', sub:'Shinkansen / private car · ~20–40 min', loc:'Kanazawa Station', addr:'Kanazawa Station, Kanazawa, Ishikawa', q:'Kanazawa Station', notes:'Twenty-odd minutes by Shinkansen toward Toyama Bay. Whether you return to Kanazawa for a third night or stay over in Toyama is entirely your preference — only a question of where you lay your head.', alert:'Day-trip or overnight — your choice' },
         { time:'Daytime', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'Toyama Bay', sub:'White shrimp · glass art · the deep bay', loc:'Toyama Bay', addr:'Toyama', q:'Toyama Bay', notes:'One of the richest fishing grounds in Japan — famed for shiroebi (white shrimp). The Toyama Glass Art Museum (a Kengo Kuma building) is an easy add for the afternoon.', alert:null },
-        { time:'Evening', type:'restaurant', badge:'Suggestion', badgeType:'suggestion', title:'Ebitei Beikkan · 海老亭別館', sub:'Dinner · Toyama institution', loc:'Ebitei Beikkan, Toyama', addr:'Toyama', q:'Ebitei Toyama', notes:'A long-standing Toyama institution built around the bay\u0027s catch. Penciled in the canvas; to be requested.', alert:null }
+        { time:'18:00', type:'restaurant', badge:'Self-booked', badgeType:'self-booked', title:'Ebitei Beikkan · 海老亭別館', sub:'Dinner · 18:00 · Toyama institution', loc:'Ebitei Beikkan, Toyama', addr:'Toyama', q:'Ebitei Toyama', notes:'A long-standing Toyama institution built around the bay\u0027s catch. Penciled in the canvas; to be requested.', alert:null }
       ] },
     { date:'2026-11-07', dayNum:8, weekday:'Saturday, 7 November', city:'Komatsu', cityClass:'', hotel:'Auberge Eaufeu', hq:'Auberge Eaufeu Komatsu', hotelNote:'Dining with rooms · suggestion', hosted:false,
       notes:'A sake-brewery visit, then dinner and an overnight at Auberge Eaufeu — among the most interesting countryside culinary destinations in the region, and a fitting close to the Hokuriku section before Tokyo.',
@@ -587,9 +587,9 @@ var TRIP = {
         { time:'Evening', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'First Tokyo evening · open', sub:'Settle in', loc:'Tokyo', addr:'Tokyo', q:'Tokyo', notes:'A deliberately open first evening in Tokyo. The remaining capital days are built around your appetites — shaped once we know where your interest sits.', alert:null }
       ] },
     { date:'2026-11-09', dayNum:10, weekday:'Monday, 9 November', city:'Tokyo', cityClass:'', hotel:null, hq:null, hosted:false,
-      notes:'Sushi Meino at noon — a private lunch on the counter, the first secured Tokyo anchor.',
+      notes:'Sushi Meino at noon — two seats on the counter under our buyout, the first secured Tokyo anchor.',
       stops:[
-        { time:'12:00', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Sushi Meino · private', sub:'Lunch · Edomae sushi · private buyout · 12:00', loc:'Sushi Meino, Tokyo', addr:'Tokyo', q:'Sushi Meino Tokyo', notes:'An established anchor of the Tokyo programme, taken as a private lunch on the counter — the room given over to your party alone. Confirmed.', alert:'Private buyout · 12:00 · no fragrance at the counter' },
+        { time:'12:00', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Sushi Meino', sub:'Lunch · Edomae sushi · buyout · 2 seats · 12:00', loc:'Sushi Meino, Tokyo', addr:'Tokyo', q:'Sushi Meino Tokyo', notes:'An established anchor of the Tokyo programme — two seats held for you on the counter, within the Happy Camper buyout. Confirmed.', alert:'Buyout · 2 seats · 12:00 · no fragrance at the counter' },
         { time:'Evening', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'Tokyo evening · to taste', sub:'Open', loc:'Tokyo', addr:'Tokyo', q:'Tokyo', notes:'Built around your appetites — sushi, yakitori, yakiniku, kaiseki, Chinese, cocktail bars, or some of the harder-to-book rooms.', alert:null }
       ] },
     { date:'2026-11-10', dayNum:11, weekday:'Tuesday, 10 November', city:'Tokyo', cityClass:'', hotel:null, hq:null, hosted:false,
@@ -598,16 +598,16 @@ var TRIP = {
         { time:'Day', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'Tokyo, built to taste', sub:'Open day', loc:'Tokyo', addr:'Tokyo', q:'Tokyo', notes:'Sushi, yakitori, yakiniku, kaiseki, Chinese, cocktail bars, or some of the harder-to-book rooms — we shape these once your preferences are clear.', alert:null }
       ] },
     { date:'2026-11-11', dayNum:12, weekday:'Wednesday, 11 November', city:'Tokyo', cityClass:'', hotel:null, hq:null, hosted:false,
-      notes:'Tempura Naruse at noon — the second secured anchor. Naruse\u0027s celebrated counter is in Shizuoka, about an hour from Tokyo by Shinkansen; a private buyout, the counter to your party alone.',
+      notes:'Tempura Naruse at noon — the second secured anchor. Naruse\u0027s celebrated counter is in Shizuoka, about an hour from Tokyo by Shinkansen; a Happy Camper buyout, with two seats held for you on the counter.',
       stops:[
         { time:'~10:30', type:'transport', badge:'Transfer', badgeType:'requested', title:'Train to Shizuoka', sub:'Shinkansen · ~1 h from Tokyo', loc:'Tokyo Station', addr:'1-9-1 Marunouchi, Chiyoda City, Tokyo', q:'Tokyo Station', notes:'A short Shinkansen run down to Shizuoka for the private Naruse lunch, returning to Tokyo afterward. Times confirmed once the day is set.', alert:null },
-        { time:'12:00', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Tempura Naruse · private', sub:'Lunch · tempura · private buyout · 12:00', loc:'Tempura Naruse', addr:'Shizuoka', q:'Tempura Naruse Shizuoka', notes:'A second confirmed anchor — a private tempura lunch, the counter given over to your party alone. Confirmed.', alert:'Private buyout · 12:00' }
+        { time:'12:00', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Tempura Naruse', sub:'Lunch · tempura · buyout · 2 seats · 12:00', loc:'Tempura Naruse', addr:'Shizuoka', q:'Tempura Naruse Shizuoka', notes:'A second confirmed anchor — two seats on the tempura counter, within the Happy Camper buyout. Confirmed.', alert:'Buyout · 2 seats · 12:00' }
       ] },
     { date:'2026-11-12', dayNum:13, weekday:'Thursday, 12 November', city:'Tokyo', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'An open Tokyo day with a confirmed yakitori dinner to close it.',
       stops:[
         { time:'Day', type:'activity', badge:'Suggestion', badgeType:'suggestion', title:'Tokyo, built to taste', sub:'Open until dinner', loc:'Tokyo', addr:'Tokyo', q:'Tokyo', notes:'The day takes shape around your preferences; the evening is already set.', alert:null },
-        { time:'20:30', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Yakitori Hikita · private', sub:'Dinner · yakitori · private buyout · 20:30', loc:'Yakitori Hikita, Tokyo', addr:'Tokyo', q:'Yakitori Hikita Tokyo', notes:'A private buyout of the Hikita yakitori counter at 20:30 — the room given over to the two of you. Confirmed.', alert:'Private buyout · 20:30 · table for 2' }
+        { time:'20:30', type:'restaurant', badge:'Confirmed', badgeType:'confirmed', title:'Yakitori Hikita', sub:'Dinner · yakitori · buyout · 2 seats · 20:30', loc:'Yakitori Hikita, Tokyo', addr:'Tokyo', q:'Yakitori Hikita Tokyo', notes:'Two seats at the Hikita yakitori counter at 20:30, within the Happy Camper buyout. Confirmed.', alert:'Buyout · 2 seats · 20:30' }
       ] },
     { date:'2026-11-13', dayNum:14, weekday:'Friday, 13 November', city:'Tokyo', cityClass:'', hotel:null, hq:null, hosted:false,
       notes:'An open Tokyo day — built around your appetites.',
@@ -626,22 +626,23 @@ var TRIP = {
 /* ═══ WISH LIST ═══ */
 var WL_CONFIRMED = [
   { name:'Sushi Sakai', style:'Sushi · Sat 31 Oct · 19:30 · dinner · Fukuoka', q:'Sushi Sakai Fukuoka' },
-  { name:'Sushi Meino', style:'Edomae sushi · Mon 9 Nov · 12:00 · private buyout · Tokyo', q:'Sushi Meino Tokyo' },
-  { name:'Tempura Naruse', style:'Tempura · Wed 11 Nov · 12:00 · private buyout · Shizuoka', q:'Tempura Naruse Shizuoka' },
-  { name:'Yakitori Hikita', style:'Yakitori · Thu 12 Nov · 20:30 · private buyout · Tokyo', q:'Yakitori Hikita Tokyo' }
+  { name:'Sushi Meino', style:'Edomae sushi · Mon 9 Nov · 12:00 · buyout · 2 seats · Tokyo', q:'Sushi Meino Tokyo' },
+  { name:'Tempura Naruse', style:'Tempura · Wed 11 Nov · 12:00 · buyout · 2 seats · Shizuoka', q:'Tempura Naruse Shizuoka' },
+  { name:'Yakitori Hikita', style:'Yakitori · Thu 12 Nov · 20:30 · buyout · 2 seats · Tokyo', q:'Yakitori Hikita Tokyo' }
 ];
-var WL_REQUESTED = [];
-var WL_SUGGESTIONS = [
-  { name:'Sakuraan', style:'Refined horse cuisine · Mon 2 Nov · Kumamoto', q:'Sakuraan Kumamoto horse cuisine' },
-  { name:'Ajimori', style:'Kurobuta black-pork shabu-shabu · Tue 3 Nov · lunch · Kagoshima', q:'Ajimori Kagoshima' },
-  { name:'Tempura Matoba', style:'Tempura · Thu 5 Nov · dinner · Kanazawa', q:'Tempura Matoba Kanazawa' },
-  { name:'Auberge Eaufeu', style:'Dining with rooms · Sat 7 Nov · dinner & overnight · Komatsu', q:'Auberge Eaufeu Komatsu' },
-  { name:'Ichiran · Honsha Sohonten', style:'Tonkotsu ramen flagship · Sun 1 Nov · lunch · Fukuoka', q:'Ichiran Honsha Sohonten Fukuoka' },
-  { name:'Oryori Furukawa (or Imoto)', style:'Kappo · Sun 1 Nov · dinner · Fukuoka', q:'Oryori Furukawa Fukuoka' },
-  { name:'Hakata Genki Ippai!!', style:'Hakata ramen · Mon 2 Nov · lunch · Fukuoka', q:'Hakata Genki Ippai Fukuoka' },
-  { name:'Mekumi', style:'Sushi & kappo · Wed 4 Nov · dinner · near Kanazawa', q:'Sushi Mekumi Nonoichi Kanazawa' },
+var WL_REQUESTED = [
+  { name:'Sakuraan', style:'Refined horse cuisine · Mon 2 Nov · dinner · Kumamoto', q:'Sakuraan Kumamoto horse cuisine' },
   { name:'Respiración', style:'Noto produce · Thu 5 Nov · lunch · Kanazawa', q:'Respiracion Kanazawa' },
-  { name:'Ebitei Beikkan', style:'Toyama Bay · Fri 6 Nov · dinner · Toyama', q:'Ebitei Toyama' }
+  { name:'Tempura Matoba', style:'Tempura · Thu 5 Nov · dinner · Kanazawa', q:'Tempura Matoba Kanazawa' }
+];
+var WL_SUGGESTIONS = [
+  { name:'Ajimori', style:'Kurobuta black-pork shabu-shabu · Tue 3 Nov · lunch · Kagoshima', q:'Ajimori Kagoshima' },
+  { name:'Auberge Eaufeu', style:'Dining with rooms · Sat 7 Nov · dinner & overnight · Komatsu', q:'Auberge Eaufeu Komatsu' },
+  { name:'Ichiran · Honsha Sohonten', style:'Walk-in · tonkotsu ramen flagship · Sun 1 Nov · Fukuoka', q:'Ichiran Honsha Sohonten Fukuoka' },
+  { name:'Oryori Furukawa (or Imoto)', style:'Kappo · Sun 1 Nov · dinner · Fukuoka', q:'Oryori Furukawa Fukuoka' },
+  { name:'Hakata Genki Ippai!!', style:'Walk-in · Hakata ramen · Mon 2 Nov · Fukuoka', q:'Hakata Genki Ippai Fukuoka' },
+  { name:'Mekumi', style:'Sushi & kappo · Wed 4 Nov · dinner · near Kanazawa', q:'Sushi Mekumi Nonoichi Kanazawa' },
+  { name:'Ebitei Beikkan', style:'Self-booked · Toyama Bay · Fri 6 Nov · dinner · Toyama', q:'Ebitei Toyama' }
 ];
 var WL_LONGTERM = [
   { name:'Tokyo · remaining days, built to taste', style:'Sushi · yakitori · yakiniku · kaiseki · Chinese · cocktail bars · harder-to-book rooms', q:'Tokyo' }
@@ -1410,8 +1411,8 @@ window.addEventListener('resize',fixHeaderOffset);
 (function(){
 "use strict";
 
-const ENC_GUEST = "12kgY+RvUZGEO1kj9DtD8EQ/R46hn8buTOtGqDxPSEvLio8zkmuvRnMKIgnnH6U802wOKNv9bgFLEGDEsTx42drzgboWoNcvTxceA2BXEVRTR1P1PMAsrwbmKJSDMYXbpQQ500eSHCowMeG/RCbOoXBdOs61zwiwRzVM4IF1tvvswlhQ1nBwu7/NiXU0CIg0hz9R7dfpMg6pyOic/rrer8Ct/qZTZ57IuWQ6YMyeourySemQWk6oo+hyRnShr0g4BkVmd72C0BHa8JQUStk216c0Y52Ta2atZZAAUO1QEsG44ecJRzc/IgMlCzMpOIKE+SArXBHy2ukFYrI4I4dyG8CCCjAMKlmt3swWu7CgiVP2sfY3OJ2w1/xsO5F5PvnNJ46WXq65SLUep+0f4vLgpdgME6cqD/6uMVCrdXWz/dxd8YpHxPbLR3GxKsabmZrPYSO+XwohrxR466sYvAHplPE2FclCPhzcrJ1i921+VfV2vQ+N0WTFnj7ZqQs1soQNBh6gHZjPjbkb39apsDKyNzkKovra9OYEwnqi9gOwDTcFcs41JhyEU5hhbjgeMvhME74lTn0VGu3yrNGZ5ylJLMFaA7BjYEQ4y7JcvtdQLqVjZMGHe/8XCWswRFww2831DskMZg8QtXahTO48nKFnxnN5+yePtdEHs5DnpwBe2VxVcMCuG6k9UQTUhoqwTQu4nor/H8HcRd8kTdwguTNOvhb7wRULWZdAmqf44YP0phwjMObjxn21Ga3LJdFGhx3iVo8M5QzhEdpcOBUVPDwoBAGLLVWFUkZdvEHePey6e2h+BTB3EXmiQbVEJv4JOU9TihZpGrBMVq4JiFbqDPttJ8qjldAemlVeLYE3A3vk3nOcNDaUIW/FKPvETufBzjATGnw6wwnwsNvZszmV306kvV0HNCgq1VWMiiVDkjOyX3mANkJC91Nxi39YkVrTmGsYVCuo2dPs4tIIyisCtR8QhHdWJTkFPPeIY8yR3pqPfAvcyxZ9U9qmXI9EoIp3eZEiDTya0Elt/4BBd6t7XgdtbJYSlTd+Bp1x";
-const ENC_INTERNAL = "rwKFGK59yl30LIuCEm6LcB7Kpo+p/AcM07FjsVVAtHsLkuztt3lCtA+yn2IhBhT7VbDuC7jRSsp1YddaSSOJPWCQfZ+Nks2hpxgeWGeaHBUueFXCM97lMPleSEHWnCM4/xHpbtVSMcufvakI85Tfmo/pB7LBtCyvvQBP62qd0uD+L5tFUKE/u+8IfqHjp20eGcQLUl/AEgEJGi302JRZFZh8cErEy0Ti8UKkWBVVIBTUW22bEwCiIT4eTCAcaS8zaq5cayho4+i6gJDURUbYd7DOv+iSkCYKPh16we+nRAVJ11xKtF4ZTIdVhyorGwcihRZPqLRlK6lPyegCSHYpFcA8vatBwLwvUCd3Drd9ol1na2/MouSi9uoXWhfyc3Bn6bDeqwdT0eTx7l7kyV6ktxnkwRtDKJk+wwS8SW/8gVuQUiHw3x7k3mpZ1nKTh2xUu7AIWTEX3XJmWy8xsgBR8j96OvNpodUx72RNSiX+ePWAnfv5MSQB+hw2t6X0yPhu6RHZLp9yivKY55b47/tW6iCA7xDnoZ029hAeeR3XycA1lXcTeX6PteTjmVU7vXDGxGNfk8HF+bJEgGZzYGqw3r6TaPr9w/EdxYiQ154ugOXsLLBDkW0EhPcMHXsbcf0j6W4q0NczKBqDq8TdTd08jRqj1c8nncZFBgEqxUaGkaF+lcIeguBz+v1IQVqISlww+eBWUb5L+zTTOMK8VcaEPbAjgWjFWTG0b0l5mIyT3Busl5v3AHemQfwuNl1JpbhGw1WkDubEoUHYyJppu1PnGLkLtNK+xrYat5Z4PUweE9vN4ONs14c8Lni4UYzLjbypHAM82i1lim0mcZO8j8xvK6P0rXAKbkdkCareEpmGttuHT31ly9Do0LdNHhAlV8kXGQZjh0DjACEcSU3R2g+iCDNj+jl9r6Nf40TNbmJCO+BGnfOeOBDxiY9DbpzjOE+GOmtEefnurYArUMRWTA7pbXbTeqUw2+pv8nq8+XafoKJgjEf6tyUGXmRGSvfy30Rlwgz10G3A90YUm17qaPjY/2gB8jHQFXmqgefBKH1ITrYeoVUrRwRrzkeetJJYeU5mbVHNfic7HePKJMpb";
+const ENC_GUEST = "wtSL9xPYnZZV2peHjp425GkGcrF3n6f0Dyc9t52Ce1nX6LgBK8xdWXVeYT4t1b12IOkZYR9hdcAb35xtl/roA9VUjFmRdhj0titE2C1O2j7Vtjiz7oCxN9QeRP4jL2VAtKydhr8nSz/RM0+0mDzey3ANI0URPglF+rU0Ocb/2XIa2SpI7jOD5L0C+iW0HKNOdneABYh6xes8oqVWeAW0B8V5s+Uf/9j5SGEj9ShnX5XdB4PTtM8i/ORjtWaqslQCqZV9dY8aDfSlYJF/ljO+NZPYjw7dKdJv3BH/jZc+VTFBxMmJxZToHtahaHEslU/hV6z9byFcJs82ZrrsKV8oqJ9NL7ztKakI9NpyLkkyLsCtV264ugYQCpP04/cHNGsIEzJWbkQ74fqncCI0r9S5qkvlb4tCn9Lt+/YOpZTbo0U+XHHx4OaW6szaz5Y8cZqytxZZ3kW/vGv63IxX+HdqneLSh8tHNhjIPHFdmznOHSheTlCZRUIISUbDym4rHwwiVjs4CypokXWZAEob5HFb8xcdksQWBoA1huB3KcRfYq337EHTpHqTr+Prb3G1GTK+P8q2MfTjr6HSsFRgQ0lYi95DoXqk4LURwNN4M8TWorfLTQqoROW4Gy1tTIp3DCrckYlEiPAM5aFWYmg6eswonY9dGTfZ7xByjpXLV1uPH2ZYwi8JVnZBEuCwGOHQlK+9M5M20M8gDxIxwacs8CQhCCR97ESjHvJablEoyF/AhTSirz+QC+mzgV6Rf4RiVyNg86ZGi6gaengt1/TA68EKlRAovCBS7AjaM9kzukPy/f9McXZzPFVveFy0hiiFGrt4nA2PUv+pvXO5vjtZyESnbNwW+mAEXKEFfa+Jn6Ev4Z3be8zw5hjIifqgugowo8tvVadJWDtcH8nyOzB/DuOr1F9upgIqYAmLPSPJ00QeeFzF9e/TBAnLqI9Q5CO4fpeQnxwfW+qOUlF1vJQDi2rAPFMtUcJZq8qNdtk0wlvvebG8acsp/zUiuvDBoFD1T1LxMbNgMytLb1KJdPXIDSv8aYxk0Y0twHAWxgSeImkCjpdABqs=";
+const ENC_INTERNAL = "4MACLjR6/tHUeiR81wowsN/dq0kD1hLY6P4PdppdaqLGvEV3wXF7N46vnqsMnNTm3pAHy3NnNIa1+LrtcXK5a3nTP2mODePEtHhEWe8XKxt8E9n/hlPUQhapx9d7bYaTppPNj3GqKCt0QeANsqd6qaQldrlQ+tfJ88Q0tRh5mKJX7xQ0e1Im4IAiYoe+GbGU+6+WsvcGUq0zYUM76c0VXiMqB01uFxyu4ib86Bwn8C13a+N5//zQBNofnH7mmNNh8/+QnsTuXYxcA/rwkJBkdjgiq+MRibF5msV3k9+k+md2rp6kWsNjhVxeRXby2Noue5vMSoBsHZfFXOognSO2qUPi9HfLonJJ7kt+6Rq4MEgafjLe8WBoJezBsGgz32SpE+CU40iVx32H9XKxSuz7tdQnC92grbDHKaCObYSCKDy3ogFmhglUg0cD/kjydK+FO3lXsR3FWin/nfOhVIMme/knj5LG+spPqILyQgm5mjUfE+bFLJeve6jK6G6uOct7RtT5kgKkmPvcgW4LsWjCXatzyPCPVeamCtKzpvaHBEDHoBjqPOs+jecDDyRUvAhPK7mMAMW1UaNiHRkuDYKn1K6W+7OkPD9lROnY8J4FaEGK4zQ7i3wGuN5igoz4jRY4WssQNFXTAW0MXBSf4BiEl8R+cA4Y62axZ3oI42EOP2CNobVC7TWkl9ra0fpM8OC6vAboZcUljfCHyxBflnIWpOrHBppByld2mpDaG2yyBRaBlF3RuoIyWeffL+/PLGXyumqOONwa6/0GB+ErwLBjN6GBe6Ld5WQGHcBmon+nJ6qBhvhEopTHg/1hm4zpI3lgplzEzzx1d8Z1srBgS85+yWcq/rZM1ZHWEhhWG9V9DwLAoSlMq5AUW4ODJtpJFSB2Ocv8mgRtyXqUzNH97bw4SOK7NnelJeNIcOpJI2nkygPkfNrf7Fscfeyjv27Z4aZ0h+FdNHSNXv3HsXe8sgrUea5kZFsABLl6QkORSJAbjIuaisK5KRPQtxfXU9jArfAsEqKgwpTjtHK2N39o+Uk1/or8RdYsi7ZuPJ+In9lcpN7a/TEu7snlcfe6bbBU5Ql7GDVRFbFTNudc71VZE0AhDWMTvHurFA8=";
 
 const TIMEOUT_SEC = 120;
 
